@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- Google Fots -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+      <!-- Remixicon Icon -->
+      <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+      <!-- Remixicon Icon -->
+      <!-- Bootstrap CSS -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+      <!-- Main CSS -->
+      <link href="assets/css/main.css" rel="stylesheet">
+
+     
+    <title>Jenkins - Ian Laffey </title>
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+
+  </head>
+  <body>
+   
+    <!-- header -->
+    <header class="ds-header" id="site-header">
+        <div class="container">
+            <div class="ds-header-inner">
+              <!-- logo -->
+              <a href="index.html" class="ds-logo">
+                <span><img src="assets/images/jenkins/miniicon.png"></span> Ian Laffey
+
+              </a>
+              <!-- logo -->
+              <!-- social -->
+              <ul class="ds-social">
+                <li><a href="https://github.com/ilaffey2" target="_blank"><i class="ri-github-fill"></i></a></li>
+                <li><a href="mailto:ianlaffey@gmail.com" target="_blank"><i class="ri-mail-send-fill"></i></a></li>
+                <li><a href="https://www.fccbulletin.com/callsign/?q=KE0OZV" target="_blank"><i class="ri-radio-fill"></i></a></li>
+
+              
+              </ul>
+              <!-- social -->
+            </div>
+        </div>
+    </header>
+    <!-- header -->
+    <main class="ds-main-section">
+      <div class="container">
+         <div class="ds-work-details-section">
+             <div class="text-center">
+               <a href="index.html#best" class="ds-button ds-arrow-button"><i class="ri-arrow-left-s-line"></i> Back</a>
+             </div>
+             <div class="row justify-content-center">
+               <div class="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10 col-xxl-10">
+                   
+                       <h1 class="ds-work-det-title">Safe Downstream Launcher</h1>
+                       <span class="ds-work-det-dep">Opal-RT Technologies</span>
+                       <span class="ds-work-det-dep">Jenkins Java Plugin - 2022</span>
+                   
+                   <div class="ds-work-content-sec">
+                       <div class="row justify-content-center">
+                           <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 col-xxl-8">
+                               <p>While refactoring the CI tests for ePHASORSIM at Opal, I encountered a problem.
+                                 The Jenkins queue, and by extensions plugins that use it, does not offer the ability to reserve downstream nodes
+                                 called through Groovy pipeline execution. This is problematic.
+                               </p>
+                               <h3>Solution</h3>
+                               <p>The issue stems from two things. There is no "handoff" method when calling a downstream build, so the Node block must be exited before downstream projects can build.
+                                 This introduces a race condition. Setting the priority of the downstream job using existing plugins seems like it would avoid pre-emption from other jobs, but
+                                all Groovy pipelines process the syntax on the Master Executor, before sending the command to a Node to execute a given command.
+                                 Because of this, even if you are operating within the context of a Node block, the queue item executing the pipeline syntax still points to the Master Executor
+                               </p>
+                               <p>Working on a large Jenkins server, where there are plenty of collisions in requests for Nodes, this proved to be problematic, 
+                                 and kept me from introducing parallelism and improving logging through downstream builds</p>
+                              <p>My solution was to code a custom Jenkins plugin from scratch. The plugin is property of Opal so I won't get into the gory details, but the basic idea 
+                                is to mark an Agent or Label as reserved by a Node by statically parsing the Groovy script, and only then dynamically allow Nodes downstream 
+                                from that to build until the Agent is released
+                              </p>
+                              <h3>Takeaways</h3>
+                              <p>Learning the source code for an open source project like Jenkins is a lot of work. I expected it to be tricky,
+                                but the amount of the Jenkins (Hudson) internal model I had to learn was a little overwhelming.
+                              </p>
+                              <p>I did really enjoy experimenting with some of the Java reflection, as well as getting to see an extremely deep class hierarchy</p>
+                              <p>I also learned a lot about Maven and build dependencies that I hadn't previously encountered</p>
+                              <p>I learned a lot about how Jenkins works behind-the-scenes after spending a couple weeks looking under the hood</p>
+                              <p>Overall, it was an awesome experience and a big part of why I really enjoyed my time at Opal. I had a lot of time and freedom to
+                                explore and learn. It was really cool seeing how it was able to integrate within Jenkins (in pre-prod).
+                              </p>
+                              <p>It was hard. Really hard. And I really enjoyed it. It was honestly a little tough going back to other work afterwords, because 
+                                it wasn't as tricky. It definitely showed me that I would really like difficult work in the future.
+                              </p>
+                           </div>
+                       </div>
+                   </div>
+             </div>
+         </div>
+      </div>
+      <div class="text-center">
+        <a href="index.html#best" class="ds-button ds-arrow-button"><i class="ri-arrow-left-s-line"></i> Back</a>
+      </div>
+    </main>
+
+   <!--  footer -->
+   <footer class="ds-footer text-center">
+     <div class="container">
+       
+        <span class="ds-copyright">© 2022 Ian Laffey.</span>
+     </div>
+   </footer>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

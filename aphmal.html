@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- Google Fots -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+      <!-- Remixicon Icon -->
+      <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+      <!-- Remixicon Icon -->
+      <!-- Bootstrap CSS -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+      <!-- Main CSS -->
+      <link href="assets/css/main.css" rel="stylesheet">
+
+     
+    <title>APHMAL - Ian Laffey </title>
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+
+  </head>
+  <body>
+   
+    <!-- header -->
+    <header class="ds-header" id="site-header">
+        <div class="container">
+            <div class="ds-header-inner">
+              <!-- logo -->
+              <a href="index.html" class="ds-logo">
+                <span><img src="assets/images/index/icon.jpg"></span> Ian Laffey
+                
+              </a>
+              <!-- logo -->
+              <!-- social -->
+              <ul class="ds-social">
+                <li><a href="https://github.com/ilaffey2" target="_blank"><i class="ri-github-fill"></i></a></li>
+                <li><a href="mailto:ianlaffey@gmail.com" target="_blank"><i class="ri-mail-send-fill"></i></a></li>
+                <li><a href="https://www.fccbulletin.com/callsign/?q=KE0OZV" target="_blank"><i class="ri-radio-fill"></i></a></li>
+
+              
+              </ul>
+              <!-- social -->
+            </div>
+        </div>
+    </header>
+    <!-- header -->
+    <main class="ds-main-section">
+      <div class="container">
+         <div class="ds-work-details-section">
+             <div class="text-center">
+               <a href="index.html#recent" class="ds-button ds-arrow-button"><i class="ri-arrow-left-s-line"></i> BAck</a>
+             </div>
+             <div class="row justify-content-center">
+               <div class="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10 col-xxl-10">
+                   <header class="ds-work-det-hed">
+                       <h1 class="ds-work-det-title">Autonomous Prognostics and Health Management Automation Language (APHMAL)</h1>
+                       <span class="ds-work-det-dep">McGill University</span>
+
+                       <span class="ds-work-det-dep">2022</span>
+                   </header>
+                   
+                   
+                   <div class="ds-work-content-sec">
+                    <h3><a href="https://github.com/ilaffey2/aphmal">Github</a></h3>
+                      <h3><a href="assets/files/ECSE539ProjectReport.pdf">Download Report</a></h3><br><br>
+                       <div class="row justify-content-center">
+                           <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 col-xxl-8">
+                            <p><figure><img src="assets/images/aphmal/icon.jpg"></figure> The metamodel for APHMAL</p>
+                               <p>Working with Alex Popov, AIAA Senior Member, provided a unique opportunity
+                                 The APHMAL could be a part of the PHM-for-HH&P solution with predictive screening capability, providing early and actionable real-time warnings on impending health issues on the International Space Station (ISS).</p>
+ 
+                               <p>This project is written using open source DSL tools from <a href="https://www.eclipse.org/epsilon/"><u>Eclipse Epsilon</u></a></p>
+                                
+                               <h2>Takeaways</h2>
+                               
+                               <p>Learning about open source modelling tools that weren't covered in class taught me a lot about learning 
+                                 to parse documentation. A lot of these tools have minimal documentation, and I had to really experiment and
+                                 scoure the web to figure out how they worked, find examples of execution, or even set them up in Eclipse.
+                               </p>
+                               <p>Much of this project involved planning and modelling. It was interesting to put a lot of thought into 
+                                 technical things that weren't purely coding
+                               </p>
+                               <p>I did, however, gain some coding practice with Java reflection. eCore EObjects use some nasty reflective methods,
+                                 and it took a good amount of recall of previous Java classes in order to create a working mapping algorithm using these objects.
+                               </p>
+                               <p>Although I didn't apply it directly in this project, I also learned a lot about automatic code generation in this class, which is 
+                                 super cool. You can do it right from eCore, and it really does improve refactoring, as changing the model can update all the related code. 
+                                 These Eclipse tools do come with a lot of boilerplate and setup cost, but once running they are pretty sweet!
+                                 A word of caution: I would maybe shy away from self-learning this if you don't have an expert to talk to.
+                               </p>
+                               <p>I was working full time at Opal while working on this project, so I was extremely overworked at the time.
+                                Working 80 hours a week sucks.
+                              </p>
+
+                               <h2>What's Going On</h2>
+                               <h3>Model Driven Engineering (MDE)</h3>
+                               <p>The goal of MDE is to minimize code through the use of modelling. Models can facilitate code through model-to-text transformations, or be
+                                 converted to other models directly through model-to-model transformation technologies. 
+                               </p>
+                               <p>In <a href="https://www.mcgill.ca/study/2021-2022/courses/ecse-539"><u>ECSE 539 - Advanced Software Language</u> </a> at McGill we had the
+                              opportunity to build a DSL in the domain of our choice, using new software of our choice.</p>
+                               <h3>Problem Description</h3>
+                               <p>The goal of this project is to provide a "minimal set" of various types of devices, so that they treat biomarkers, while minimizing the sum of a linear value like cost</p>
+                               <p>Input is a Flexi Model, Output is a eCore .model <a href="https://www.eclipse.org/epsilon/doc/flexmi/#limitations">(<u>Flexmi does not support saving</u>)</a></p>
+                               <h4>Example</h4>
+                               <p>The following example illustrates mapping of two astronauts based on two different qualities.
+                                 Even though they have identical biomarkers, they are prioritizing different qualities, and so have different devices mapped to them.
+                                 For more examples, and to test it out yourself, see <a href="https://github.com/ilaffey2/aphmal"><u>Github</u></a>
+                               </p>
+                               <p><figure><img src="assets/images/aphmal/input.jpg"></figure>
+                                Input Model</p>
+                                <p><figure><img src="assets/images/aphmal/output.jpg"></figure>
+                                  Output Model</p>
+                                
+                               <h4>Assumptions</h4>
+                               <p>For the input syntax:</p>
+                               <ul>
+                                <li>Each crew member is recognized as a healthy person based on the formal pre-flight health screening routine and its results</li>
+                                <li>Each crew member is provided with a set of his/her biomarkers</li>
+                                <li>Biomarker is provided with a set of sensors, and a set of responders that “treat”/act upon the biomarkers. There must be at least 1 sensor and 1 responder for each biomarker.</li>
+                                <li>Devices must have qualityType specified of type == Astronaut.Quality in order to be selected to treat a biomarker. (1)</li>
+                              </ul>
+                                <p>For the output syntax:</p>
+                                <ul>
+                                <li>The list of devices contained in an Astronaut all contain qualities of type Input!Astronaut.Quality</li>
+                                <li>The list of devices has been optimized to minimize the sum of qualities for the qualityType given by Input!Astronaut.Quality</li>
+                                <li> Each biomarker is covered by a responder and sensor (if (1) is met)</li>
+                                </ul>
+                                
+
+
+                              <H3>Metamodel</H3>
+                               <p>Defined in Epsilon EMFatic, designed to be extendable</p>
+                               <figure><img src="assets/images/aphmal/emfatic.png"></figure>
+                               <br>
+                              
+                               <h3>Transformation</h3>
+                               <p>Written in ETL. A simple binding wrapper, that acted to call custom Java plugin. The Java plugin provides an algorithm 
+                                to generate sensor mappings from input. These are in the form of lists, which are bound in ETL.
+                               </p>
+                               
+                               
+                               <div class="text-center"><span>Big thanks to Gunter Mussbacher for advising on this project</span></div>
+                               
+                           </div>
+                       </div>
+                   </div>
+                   <div class="text-center">
+                    <a href="index.html#best" class="ds-button ds-arrow-button"><i class="ri-arrow-left-s-line"></i> BAck</a>
+                  </div>
+             </div>
+         </div>
+      </div>
+    </main>
+
+   <!--  footer -->
+   <footer class="ds-footer text-center">
+     <div class="container">
+       
+        <span class="ds-copyright">© 2022 Ian Laffey.</span>
+     </div>
+   </footer>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

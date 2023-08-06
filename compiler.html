@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- Google Fots -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+      <!-- Remixicon Icon -->
+      <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+      <!-- Remixicon Icon -->
+      <!-- Bootstrap CSS -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+      <!-- Main CSS -->
+      <link href="assets/css/main.css" rel="stylesheet">
+
+
+    <title>Compiler - Ian Laffey </title>
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+
+  </head>
+  <body>
+
+    <!-- header -->
+    <header class="ds-header" id="site-header">
+        <div class="container">
+            <div class="ds-header-inner">
+              <!-- logo -->
+              <a href="index.html" class="ds-logo">
+                <span><img src="assets/images/index/icon.jpg"></span> Ian Laffey
+              </a>
+              <!-- logo -->
+              <!-- social -->
+              <ul class="ds-social">
+                <li><a href="https://github.com/ilaffey2" target="_blank"><i class="ri-github-fill"></i></a></li>
+                <li><a href="mailto:ianlaffey@gmail.com" target="_blank"><i class="ri-mail-send-fill"></i></a></li>
+                <li><a href="https://www.fccbulletin.com/callsign/?q=KE0OZV" target="_blank"><i class="ri-radio-fill"></i></a></li>
+
+
+              </ul>
+              <!-- social -->
+            </div>
+        </div>
+    </header>
+    <!-- header -->
+    <main class="ds-main-section">
+      <div class="container">
+         <div class="ds-work-details-section">
+             <div class="text-center">
+               <a href="index.html#best" class="ds-button ds-arrow-button"><i class="ri-arrow-left-s-line"></i> BAck</a>
+             </div>
+             <div class="row justify-content-center">
+               <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                   <header class="ds-work-det-hed">
+                       <h1 class="ds-work-det-title">C Compiler</h1>
+                       <span class="ds-work-det-dep">McGill University</span>
+
+                       <span class="ds-work-det-dep">2021</span>
+                   </header>
+                   <figure><img src="assets/images/compiler/fullsize.png"></figure>
+                   <div class="ds-work-content-sec">
+                       <div class="row justify-content-center">
+                           <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 col-xxl-8">
+                               <p>Created a C Compiler, in Java from scratch. This included lexer, parser, AST generator, semantic analyzer, and regalloc.
+                                 This was an individual project. Some boilerplate code by Christophe Dubach.</p>
+
+                               <p>Sadly, as this is for a <a href="https://www.cs.mcgill.ca/~cs520/2021/index.html"> class at McGill, </a>
+                                and the course content is static, it is not open source.
+                               </p>
+
+                               <h2>Takeaways</h2>
+                               <p>A compiler is actually just a massive collection of very straightforward things. There weren't too many crazy algorithms or bits of Java syntax required.</p>
+                               <p>Writing such a large scale program myself gave me practice with abstracting and focusing on different parts of a program at a time, and learning where to look when debugging.
+                                 In contrast to a larger, group project where its probably someone else's fault if something was broken outside of the section I'm currently working in,
+                                 here I had to switch gears if I discovered a bug in something previously written.
+                               </p>
+                               <p>Since register allocation is really just graph building and coloring, I got lots of hands on experience with graph related algorithms.
+                                 It was also nice to apply theoretical syntax, semantic, and typing rules I've encountered in other classes (although can be much tricker than they are here).
+                               </p>
+                               <p>This project was a big confidence builder in my coding abilities.<br>
+                               Obviously, I learned a lot about how Compilers function behind the scenes.<br>
+                               Surprisingly, I did not learn anything new about C, since I was not actually writing the compiler in C.</p>
+                               <h2>What's Going On</h2>
+                               <p>If you're not familiar with compiler design, <a href="https://en.wikipedia.org/wiki/Compiler#Three-stage_compiler_structure"><b>Wikipedia</b></a> is a good place to start </p>
+
+                               <h3>Lexer</h3>
+                               <p>By far the most simple part of the compiler, the Lexer generates tokens from input text.</p>
+                               <p>The Tokenizer was basically a long switch statement with checks:
+                                 whitespace had to be ignored, and comment strings recognized.</p>
+                               <p>The Token object contains additional information, like position and character type (char, int)</p>
+                               <p>A simple Scanner was created, feeding data into the Tokenizer, which then created Token objects</p>
+
+                               <h3>Parser</h3>
+                               <p>Verify the syntax of the <a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form"><b>EBNF Grammar</b></a> representing a subset of C - "Mini C"
+                                 <figure><img src="assets/images/compiler/ebnf.png" height=50%, width = 50%></figure> <figure><img src="assets/images/compiler/opprecedence.png" height=49%, width = 50%></figure>
+                                </p>
+                               <p>The grammar was converted to an <a href="https://en.wikipedia.org/wiki/LL_grammar#Finite_case"><b>LL-k grammar.</b></a>
+                                As a non-trivial part of the project, it is omitted.</p>
+                               <p>A recursive descent parser was used to ensure operator precedence using <a href "https://en.wikipedia.org/wiki/Kleene_star"> <b>Kleene closures</b></a></p>
+                               <p><figure><img src="assets/images/compiler/parserloop.png"></figure>
+                                This code does all the parsing for a program. Remember that in C, all execution is done through a main() function</p>
+                               <p>The parser checks syntax and stores parsed information as objects in an <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree#Application_in_compilers"><b>Abstract Syntax Tree</b></a></p>
+
+                               <h3>AST</h3>
+                               <p><figure><img src="assets/images/compiler/abstract.png"></figure> Abstract grammar for Mini C in EBNF</p>
+                               <p>All Abstract Syntax Tree (AST) nodes are represented with Java classes. A single Program object is the root of an AST.
+                                  These Java classes also contain fields with semantic information.
+                                 <figure><img src="assets/images/compiler/astobjects.png", height=13% , width=13%></figure>
+                               </p>
+                               <p>Once constructed, the Visitor design pattern was used on the AST.
+                                <figure><img src="assets/images/compiler/astprinter.png"></figure>
+                                 A printer was implemented to display the AST of a program<br>
+                                <figure><img src = "assets/images/compiler/sempass.png"></figure>
+                                 Semantic analysis was also done with a Visitor</p>
+                               <p>The following analysis was done on the AST:</p>
+                               <ul>
+                                <li>Name Analysis: Ensure that the scoping and visibility rules of the language are respected.</li>
+                                <li>Global and Local Scopes: Identifiers declared in the global scope can be accessed anywhere in the program,
+                                   A variable declared in a block is accessible in the block and all inner blocks of that block, but not accessible outside the block.
+                                   In both cases, it is illegal to declare twice the same identifiers in the same current block.</li>
+                                <li>Shadowing: An identifier declared within a given scope has the same name as an identifier declared in an outer scope.</li>
+                                <li>Built-in functions:
+                                  void print_s(char* s);
+                                  void print_i(int i);
+                                  void print_c(char c);
+                                  char read_c();
+                                  int read_i();
+                                  void* mcmalloc(int size);</li>
+                                <li>Type Analysis: Using <a href="./assets/files/Typing rules for Mini C.pdf"><b>formal typing rules for Mini C</b></a> to perform static type-checking.</li>
+                                <li>L-value checking: lvalues (left-values) are the only expressions that can appear on the left-hand side of an assignment or as an argument to the address-of operator (&).</li>
+                              </ul>
+
+                              <h3>Code Generation</h3>
+                              <p>After verifying the semantics, code needs to be generated to execute the program.
+                                The program is compiled into <a href="https://en.wikipedia.org/wiki/MIPS_architecture"> MIPS </a>in order to use
+                                <a href="courses.missouristate.edu/KenVollmar/MARS/">MARS</a>, a cross platform MIPS simulator used for educational purposes.
+                              </p>
+                              <p>We will now produce temporary MIPS code, using virtual registers.
+                                Virtual registers are representations of real registers, but there is no limit to how many can be used.
+                                They can be naively interacted with by saving/loading their contents onto the stack everytime they are used, however this is very slow.</p>
+                              <p>Global variables are statically stored in memory using the MIPS <font color="red">.data</font> directive.<br>
+                                Local variables are stored in memory on the stack, using <font color="red">$sp</font> manipulation. </p>
+                              <p>Data padding is an important consideration, as <font color="green">`sizeof(char)==1` `sizeof(int)==4` `sizeof(int*)==4`,</font> but all fields must align at a 4 byte (32bit) boundary.</p>
+                              <p>Branching is done by converting conditionals into a combination of <font color ="blue">j b</font> and <font color="blue">bne</font> instructions. </p>
+                              <p>Struct/Array access and assignment is done using <font color="blue">lw</font> and <font color="blue">sw</font> instructions and considering an offset.</p>
+                              <p>Function calls are done using a <font color="blue">j label</font> instruction, and pushing pushing <font color="red">$s  $rp</font> onto the stack so they are not overwritten</p>
+                              <p>Stdlib functions are performed using MIPS <font color="red">syscall</font></p>
+                              <p>Local, static variables (that never have an adressofoperation called on them), are represented as virtual registers to allow them to be optimized in register allocation.
+                                Only the variables that need to be in memory are ever in memory, the ones that can be handled through registers are and the stack is avoided when possible.
+                              </p>
+
+                              <h4>Register Allocation</h4>
+                              <p>Now that we have a complete MIPS program using virtual registers, we need to allocate real registers to our program.
+                                MIPS provides 18 variable registers <font color="red">$s0-s9 $t0-t7</font>, where s-registers are guaranteed to be saved after a funcall.
+                                MIPS also includes system registers <font color="red">$sp $ip $mul</font> etc
+                              </p>
+
+                              <p>In order to keep track of what is being executed when, a <a href="https://en.wikipedia.org/wiki/Control-flow_graph"><b>Control-Flow-Graph (CFG)</b></a> is created.</p>
+                              <p><a href="https://www.classes.cs.uchicago.edu/archive/2004/spring/22620-1/docs/liveness.pdf"><b>Liveness Analysis</b></a> is performed on the CFG, with each node of the CFG keeping a liveIn and liveOut set
+                              This information is then used to create an Interference Graph, where edges represent a point in the program execution where both virtual registers are alive at the same time.</p>
+                              <p>Note that the CFG nodes are instructions, the Interference Graph nodes are virtual registers. Big difference!</p>
+                              <p>Finally I implemented <a href="https://en.wikipedia.org/wiki/Chaitin%27s_algorithm"><b>Chaitin's Algorithm for Graph Colouring</b></a>, which includes a spill function, where if we were unable to properly
+                              colour the interference graph, spill is saved onto the stack.</p>
+
+                           </div>
+                       </div>
+
+                   </div>
+                   <div class="text-center">
+                    <a href="index.html#best" class="ds-button ds-arrow-button"><i class="ri-arrow-left-s-line"></i> BAck</a>
+                  </div>
+               </div>
+             </div>
+         </div>
+      </div>
+    </main>
+
+   <!--  footer -->
+   <footer class="ds-footer text-center">
+     <div class="container">
+
+        <span class="ds-copyright">© 2022 Ian Laffey.</span>
+     </div>
+   </footer>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
