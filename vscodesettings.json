@@ -58,8 +58,8 @@
         "list.hoverForeground": "#DEC165",
         "terminal.background": "#251200",
         "terminal.foreground": "#DEC165",
-        "terminalCursor.background": "#DEC165",
-        "terminalCursor.foreground": "#251200",
+        "terminalCursor.background": "#ffffff",
+        "terminalCursor.foreground": "#ffffff",
         "terminal.ansiBlack": "#000000",
         "terminal.ansiRed": "#D6262B",
         "terminal.ansiGreen": "#919C00",
@@ -77,6 +77,6 @@
         "terminal.ansiBrightCyan": "#E6A96B",
         "terminal.ansiBrightWhite": "#FFEAA3",
         "terminal.selectionBackground": "#403D52",
-        "terminalOverviewRuler.cursorForeground": "#DEC165"
+        "terminalOverviewRule r.cursorForeground": "#00FF00"
     }
 }
