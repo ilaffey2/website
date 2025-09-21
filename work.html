@@ -188,6 +188,21 @@
       left: -5%;
     }
 
+    .back-link {
+      font-size: 14px;
+      margin-bottom: 40px;
+    }
+
+    .back-link a {
+      color: #7CC9CF;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .back-link a:hover {
+      color: #FFCB1B;
+    }
+
     /* Buttons */
     .button {
       display: inline-block;
@@ -284,6 +299,10 @@
       border-radius: 8px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     }
+
+    .work-item.garden .gallery .section-intro {
+      margin: 0;
+    }
   </style>
 </head>
 
@@ -292,8 +311,12 @@
 
     <!-- About -->
     <div class="section">
+      <a href="./index.html" class="back-link"> ← back to main page</a> <br />
+      <br />
+
       <h2 class="section-title">work</h2>
-      <p class="section-intro">Some things I am proud of</p>
+
+      <p class="section-intro">some things I am proud of</p>
     </div>
 
 
@@ -336,22 +359,6 @@
         </div>
       </div>
 
-      <!-- GitHub Stats -->
-      <div class="work-item">
-        <div class="work-content">
-          <h3>San Francisco</h3>
-          <p>
-            The year I moved to San Francisco, visualized in git commits.
-            I genuinely believe that if you work hard enough, you are bound to succeed. I wrote more code than
-            I have in any other year. 3103 commits is all it takes to change your life.
-          </p>
-        </div>
-        <div class="work-embed">
-          <iframe src="./github-contributions.html" scrolling="no"></iframe>
-        </div>
-      </div>
-
-
       <div class="work-item">
         <div class="work-content">
           <h3>The Stable</h3>
@@ -376,6 +383,24 @@
         </div>
       </div>
 
+      <!-- GitHub Stats -->
+      <div class="work-item">
+        <div class="work-content">
+          <h3>San Francisco</h3>
+          <p>
+            The year I moved to San Francisco, visualized in git commits.
+            I genuinely believe that if you work hard enough, you are bound to succeed. I wrote more code than
+            I have in any other year. 3103 commits is all it takes to change your life.
+          </p>
+        </div>
+        <div class="work-embed">
+          <iframe src="./github-contributions.html" scrolling="no"></iframe>
+        </div>
+      </div>
+
+
+
+
       <div class="work-item">
         <div class="work-content">
           <h3>Exact Payments</h3>
@@ -393,17 +418,18 @@
           <h3>C Compiler</h3>
           <p>
             Worse than gcc but it works!
+            I did a <a href="compiler.html">write up</a> after I built this in my last year of school.
+
           </p>
-          <a href="compiler.html">Write up</a>
         </div>
       </div>
       <div class="work-item">
         <div class="work-content">
           <h3>Music</h3>
           <p>
-            I've been making music since I was 16. I've made a lot a lot a lot of music and released a bit of it.
-          </p>;
-          <a href="music.html">Music</a>
+            I've been <a href="music.html">making music</a> since I was 16. I've made a lot a lot a lot of music and
+            released a bit of it.
+          </p>
 
         </div>
       </div>
@@ -412,7 +438,7 @@
 
     <!-- Navigation -->
     <div class="nav-section">
-      <a href="./index.html" class="button">Back to main page</a>
+      <a href="./index.html" class="back-link"> ← back to main page</a>
     </div>
   </div>
 </body>

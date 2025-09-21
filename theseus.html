@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Theseus - Ian Laffey</title>
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    a {
+      color: #7CC9CF;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    body {
+      background-color: #2A1F1D;
+      color: #DEC165;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    ::selection {
+      background: #BE8A13;
+      color: #2A1F1D;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .page-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #FFEAA3;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .back-link {
+      font-size: 14px;
+      margin-bottom: 40px;
+    }
+
+    .back-link a {
+      color: #7CC9CF;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .back-link a:hover {
+      color: #FFCB1B;
+    }
+
+    .header-image {
+      margin-top: 40px;
+    }
+
+    .header-image img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #7F6A55;
+      filter: sepia(0.2) brightness(0.9);
+    }
+
+    /* Track list */
+    .track-list {
+      max-width: 500px;
+      margin: 60px auto;
+    }
+
+    .track-list ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .track-list li {
+      margin-bottom: 20px;
+      padding-left: 24px;
+      position: relative;
+      font-size: 16px;
+    }
+
+    .track-list li::before {
+      content: "♪";
+      position: absolute;
+      left: 0;
+      color: #7F6A55;
+      transition: color 0.2s ease;
+    }
+
+    .track-list li:hover::before {
+      color: #FFCB1B;
+    }
+
+    .track-list a {
+      color: #DEC165;
+      text-decoration: none;
+      transition: color 0.2s ease;
+      position: relative;
+    }
+
+    .track-list a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 1px;
+      background: #FFCB1B;
+      transition: width 0.3s ease;
+    }
+
+    .track-list a:hover {
+      color: #FFEAA3;
+    }
+
+    .track-list a:hover::after {
+      width: 100%;
+    }
+
+    /* Platform indicators */
+    .track-list a[href*="soundcloud"]::before {
+      content: "[SC] ";
+      color: #7F6A55;
+      font-size: 12px;
+    }
+
+    .track-list a[href*="youtu"]::before {
+      content: "[YT] ";
+      color: #7F6A55;
+      font-size: 12px;
+    }
+
+    /* Footer */
+    .page-footer {
+      margin-top: 80px;
+      text-align: center;
+      padding-top: 40px;
+      border-top: 1px solid #7F6A55;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      body {
+        padding: 30px 20px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .track-list {
+        padding: 0 20px;
+      }
+
+      .track-list li {
+        font-size: 15px;
+        margin-bottom: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="page-header">
+      <h1>THESEUS</h1>
+      <div class="back-link">
+        <a href="./index.html">← back to main page</a>
+      </div>
+      <div class="header-image">
+        <a href="https://theseus.us">
+          <img src="./assets/images/theseus/header.jpeg" alt="Theseus Header" />
+        </a>
+      </div>
+    </header>
+
+    <p>
+      I am immensely proud of the work we have done at Theseus. You can find more info <a href="https://theseus.us">on
+        our website</a>. These are a couple of my favorite images from our work.
+    </p>
+
+    <div class="header-image">
+      <img src="./assets/images/theseus/bird.jpg" alt="Drone" />
+    </div>
+
+    <div class="header-image">
+      <img src="./assets/images/theseus/sensor.png" alt="Sensor" />
+    </div>
+
+
+
+    <!-- Footer -->
+    <footer class="page-footer">
+      <div class="back-link">
+        <a href="./index.html">← back to main page</a>
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>
