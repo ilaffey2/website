@@ -448,17 +448,22 @@
 
       The following analysis was done on the AST:
 
-      Name Analysis: Ensure that the scoping and visibility rules of the language are respected.
+      Name Analysis: Ensure that the scoping and visibility rules of the language are respected.<br />
       Global and Local Scopes: Identifiers declared in the global scope can be accessed anywhere in the program, A
       variable declared in a block is accessible in the block and all inner blocks of that block, but not accessible
       outside the block. In both cases, it is illegal to declare twice the same identifiers in the same current block.
+      <br />
       Shadowing: An identifier declared within a given scope has the same name as an identifier declared in an outer
       scope.
+      <br />
       Built-in functions: void print_s(char* s); void print_i(int i); void print_c(char c); char read_c(); int read_i();
       void* mcmalloc(int size);
+      <br />
       Type Analysis: Using formal typing rules for Mini C to perform static type-checking.
+      <br />
       L-value checking: lvalues (left-values) are the only expressions that can appear on the left-hand side of an
       assignment or as an argument to the address-of operator (&).
+      <br />
       <h3>Code Generation</h3>
       <p>
         After verifying the semantics, code needs to be generated to execute the program.
