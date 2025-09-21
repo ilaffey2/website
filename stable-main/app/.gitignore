@@ -2,7 +2,6 @@
 .node-gyp
 node_modules
 *.png
-*.glb
 *.bin
 *.gltf
 *.jpeg
