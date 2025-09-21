@@ -276,6 +276,7 @@
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
       object-fit: cover;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: zoom-in;
     }
 
     .work-item.garden .gallery img:hover {
@@ -302,6 +303,96 @@
 
     .work-item.garden .gallery .section-intro {
       margin: 0;
+    }
+
+    /* Lightbox */
+    #lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(42, 31, 29, 0.95);
+      backdrop-filter: blur(8px);
+      cursor: zoom-out;
+    }
+
+    #lightbox img {
+      margin: auto;
+      display: block;
+      max-width: 90%;
+      max-height: 85vh;
+      margin-top: 7.5vh;
+      border: 2px solid #7F6A55;
+      border-radius: 8px;
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
+    }
+
+    #lightbox .close {
+      position: fixed;
+      top: 30px;
+      right: 40px;
+      color: #DEC165;
+      font-size: 32px;
+      font-weight: 300;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: rgba(42, 31, 29, 0.8);
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: 1px solid #7F6A55;
+    }
+
+    #lightbox .close:hover {
+      color: #FFCB1B;
+      transform: rotate(90deg);
+      border-color: #FFCB1B;
+    }
+
+    /* Add cursor pointer to clickable images */
+    .gallery img,
+    .work-image img {
+      cursor: zoom-in;
+    }
+
+    /* Fade in animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    #lightbox.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      #lightbox .close {
+        top: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+      }
+
+      #lightbox img {
+        max-width: 95%;
+        max-height: 90vh;
+        margin-top: 5vh;
+      }
     }
   </style>
 </head>
@@ -441,6 +532,48 @@
       <a href="./index.html" class="back-link"> ← back to main page</a>
     </div>
   </div>
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <span class="close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img">
+  </div>
+  <script>
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const closeBtn = document.querySelector("#lightbox .close");
+
+    document.querySelectorAll(".gallery img, .work-image img").forEach(img => {
+      img.addEventListener("click", () => {
+        lightbox.className = "show";
+        lightboxImg.src = img.src;
+        document.body.style.overflow = "hidden"; // Prevent background scroll
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.className = "";
+      setTimeout(() => {
+        lightbox.style.display = "none";
+        document.body.style.overflow = "auto"; // Restore scroll
+      }, 300);
+    }
+
+    closeBtn.onclick = closeLightbox;
+
+    lightbox.onclick = function (e) {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    }
+
+    // ESC key to close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.className === "show") {
+        closeLightbox();
+      }
+    });
+  </script>
+
 </body>
 
 </html>
