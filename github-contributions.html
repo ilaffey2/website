@@ -2,10 +2,17 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GitHub Contributions</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap');
+
+        :root {
+            --cell: 9px;
+            /* dynamically updated via JS to fill width */
+            --gap: 2px;
+        }
 
         * {
             margin: 0;
@@ -23,18 +30,13 @@
         .contributions-container {
             padding: 20px;
             max-width: 100%;
-            overflow: hidden;
-        }
-
-        .header {
-            margin-bottom: 20px;
         }
 
         .title {
             font-size: 16px;
             font-weight: 700;
             color: #BE8A13;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             display: inline-block;
             border-bottom: 2px solid #7F6A55;
             padding-bottom: 6px;
@@ -44,9 +46,7 @@
             overflow-x: auto;
             overflow-y: hidden;
             -webkit-overflow-scrolling: touch;
-            margin-bottom: 20px;
-
-            /* 🔽 Hides scrollbar visuals but keeps scrolling */
+            margin-bottom: 16px;
             -ms-overflow-style: none;
             /* IE & Edge */
             scrollbar-width: none;
@@ -55,119 +55,78 @@
 
         .graph-scroll::-webkit-scrollbar {
             display: none;
-            /* Chrome, Safari, Opera */
         }
 
+        /* Chrome/Safari/Opera */
+
         .graph-content {
-            min-width: 900px;
+            width: 100%;
         }
 
         .graph-wrapper {
             display: flex;
             gap: 12px;
-            margin-bottom: 16px;
+            margin-bottom: 8px;
+            align-items: flex-start;
         }
 
         .months-header {
-            display: flex;
+            display: grid;
+            grid-auto-flow: column;
+            gap: var(--gap);
             margin-bottom: 6px;
             margin-left: 28px;
+            /* align after weekdays column */
             font-size: 10px;
             color: #7F6A55;
+            grid-template-columns: none;
+            /* set in JS to repeat(weeks, var(--cell)) */
         }
 
         .month {
-            flex: 0 0 auto;
-            width: 50px;
             text-align: left;
+            white-space: nowrap;
         }
 
         .weekdays {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: var(--gap);
             font-size: 9px;
             color: #7F6A55;
             width: 24px;
         }
 
         .weekday {
-            height: 9px;
+            height: var(--cell);
             display: flex;
             align-items: center;
+            justify-content: flex-start;
         }
 
         .contributions-graph {
-            display: flex;
-            gap: 2px;
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: var(--cell);
+            gap: var(--gap);
+            width: 100%;
         }
 
         .week {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
+            display: grid;
+            grid-template-rows: repeat(7, var(--cell));
+            gap: var(--gap);
         }
 
         .day {
-            width: 9px;
-            height: 9px;
+            width: var(--cell);
+            height: var(--cell);
             border-radius: 2px;
             cursor: pointer;
             transition: all 0.2s ease;
             position: relative;
-        }
-
-        /* Mobile adjustments */
-        @media (max-width: 768px) {
-            .contributions-container {
-                padding: 16px;
-            }
-
-            .title {
-                font-size: 14px;
-            }
-
-            .graph-scroll {
-                margin: 0 -16px 16px -16px;
-                padding: 0 16px;
-            }
-
-            .months-header {
-                font-size: 9px;
-            }
-
-            .weekdays {
-                font-size: 8px;
-                width: 20px;
-            }
-
-            .weekday {
-                height: 8px;
-            }
-
-            .day {
-                width: 8px;
-                height: 8px;
-            }
-
-            .stats {
-                gap: 16px;
-                font-size: 12px;
-                flex-wrap: wrap;
-                justify-content: space-around;
-            }
-
-            .stat-item {
-                min-width: 70px;
-            }
-
-            .stat-value {
-                font-size: 20px;
-            }
-
-            .stat-label {
-                font-size: 10px;
-            }
+            background: #3B302D;
+            /* default level 0 */
         }
 
         .day:hover {
@@ -222,9 +181,10 @@
         .stats {
             display: flex;
             gap: 32px;
-            padding-top: 20px;
+            padding-top: 16px;
             border-top: 1px solid #7F6A55;
             font-size: 13px;
+            flex-wrap: wrap;
         }
 
         .stat-item {
@@ -241,7 +201,7 @@
             font-size: 11px;
             color: #7F6A55;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: .05em;
             margin-top: 4px;
         }
 
@@ -256,199 +216,312 @@
             text-align: center;
             padding: 40px;
         }
+
+        /* Mobile tweaks */
+        @media (max-width:768px) {
+            .contributions-container {
+                padding: 16px;
+            }
+
+            .title {
+                font-size: 14px;
+            }
+
+            .graph-scroll {
+                margin: 0 -16px 12px -16px;
+                padding: 0 16px;
+            }
+
+            .weekdays {
+                font-size: 8px;
+                width: 20px;
+            }
+        }
+
+        /* Make the outer container fluid inside an iframe */
+        html,
+        body {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Stats: responsive, consistent columns */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px 24px;
+            align-items: stretch;
+            padding-top: 16px;
+            margin-top: 8px;
+            border-top: 1px solid #7F6A55;
+        }
+
+        .stat-item {
+            display: grid;
+            grid-template-rows: auto auto;
+            align-items: center;
+            justify-items: center;
+            padding: 10px 12px;
+            border: 1px solid rgba(127, 106, 85, 0.5);
+            border-radius: 8px;
+            background: rgba(42, 31, 29, 0.25);
+        }
+
+        /* Tight, consistent typography */
+        .stat-value {
+            font-size: clamp(18px, 2.2vw, 22px);
+            font-weight: 700;
+            color: #FFCB1B;
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-size: clamp(10px, 1.3vw, 11px);
+            color: #7F6A55;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-top: 4px;
+        }
+
+        /* Ensure graph area scales nicely in narrow iframes */
+        .graph-content {
+            width: 100%;
+        }
+
+        .graph-wrapper {
+            gap: 12px;
+        }
+
+        /* Keep weekday column from crushing the grid on very small widths */
+        .weekdays {
+            width: clamp(20px, 6vw, 24px);
+        }
+
+        /* Optional: reduce padding for very small iframes */
+        @media (max-width: 420px) {
+            .contributions-container {
+                padding: 14px;
+            }
+
+            .stats {
+                gap: 12px 16px;
+            }
+
+            .stat-item {
+                padding: 8px 10px;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="contributions-container">
-        <div class="header">
-            <h2 class="title">2023 CONTRIBUTIONS</h2>
-        </div>
-
+        <div class="title">Commits</div>
         <div id="content" class="loading">Loading contributions...</div>
     </div>
 
     <script>
-        // Auto-load the contributions file
         async function loadContributions() {
             try {
-                const response = await fetch('./assets/files/contributions_gh_2023.json');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const data = await response.json();
-                displayContributions(data.data);
-            } catch (error) {
-                document.getElementById('content').innerHTML = `<div class="error">Error loading contributions: ${error.message}</div>`;
-                console.error('Error:', error);
+                const res = await fetch('./assets/files/contributions_gh_2023.json', { cache: 'no-store' });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const json = await res.json();
+                displayContributions(json.data);
+            } catch (err) {
+                document.getElementById('content').innerHTML =
+                    `<div class="error">Error loading contributions: ${err.message}</div>`;
+                console.error(err);
             }
         }
 
         function displayContributions(data) {
-            let contributionsArray = [];
+            let contributions = [];
 
-            // Handle data.data format as you mentioned
-            if (data.data && Array.isArray(data.data)) {
-                contributionsArray = data.data;
-            }
-            // Extract contributions from GitHub API format
-            else if (data.user && data.user.contributionsCollection &&
-                data.user.contributionsCollection.contributionCalendar) {
-
-                const calendar = data.user.contributionsCollection.contributionCalendar;
-                const totalContributions = calendar.totalContributions;
-
-                if (calendar.weeks) {
-                    calendar.weeks.forEach(week => {
-                        if (week.contributionDays) {
-                            week.contributionDays.forEach(day => {
-                                contributionsArray.push({
-                                    date: day.date,
-                                    count: day.contributionCount,
-                                    color: day.color
-                                });
-                            });
-                        }
-                    });
-                }
-            }
-            // Handle direct array
-            else if (Array.isArray(data)) {
-                contributionsArray = data;
+            // Accept your prior data envelope(s)
+            if (data?.data && Array.isArray(data.data)) {
+                contributions = data.data;
+            } else if (Array.isArray(data)) {
+                contributions = data;
+            } else if (data?.user?.contributionsCollection?.contributionCalendar?.weeks) {
+                const weeks = data.user.contributionsCollection.contributionCalendar.weeks;
+                weeks.forEach(w => w.contributionDays?.forEach(d => {
+                    contributions.push({ date: d.date, count: d.contributionCount, color: d.color });
+                }));
             }
 
-            if (contributionsArray.length === 0) {
+            if (contributions.length === 0) {
                 document.getElementById('content').innerHTML = '<div class="error">No contributions data found</div>';
                 return;
             }
 
-            // Calculate stats
-            let maxCount = 0;
-            let totalContributions = 0;
-            let activeDays = 0;
-            let longestStreak = 0;
-            let currentStreak = 0;
-
-            contributionsArray.forEach(day => {
-                const count = day.count;
-                maxCount = Math.max(maxCount, count);
-                totalContributions += count;
-
-                if (count > 0) {
-                    activeDays++;
-                    currentStreak++;
-                    longestStreak = Math.max(longestStreak, currentStreak);
-                } else {
-                    currentStreak = 0;
-                }
+            // Stats
+            let maxCount = 0, total = 0, activeDays = 0, longest = 0, current = 0;
+            contributions.forEach(d => {
+                const c = d.count || 0;
+                maxCount = Math.max(maxCount, c);
+                total += c;
+                if (c > 0) { activeDays++; current++; longest = Math.max(longest, current); }
+                else { current = 0; }
             });
 
-            // Build the graph HTML
-            let html = '<div class="graph-scroll"><div class="graph-content">';
-            html += '<div class="months-header">';
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            months.forEach((month, i) => {
-                html += `<div class="month" style="grid-column: span ${i === 1 ? 4 : 5}">${month}</div>`;
-            });
-            html += '</div>';
+            const weeks = computeWeeks(contributions);
 
-            html += '<div class="graph-wrapper">';
-            html += '<div class="weekdays"><div class="weekday"></div><div class="weekday">M</div><div class="weekday"></div><div class="weekday">W</div><div class="weekday"></div><div class="weekday">F</div><div class="weekday"></div></div>';
-            html += '<div class="contributions-graph">';
+            // Shell
+            const html = `
+  <div class="graph-scroll">
+    <div class="graph-content">
+      <div class="months-header" id="monthsHeader"></div>
 
-            // Group by week
-            let currentWeek = [];
-            let weeks = [];
-            let lastWeekNum = -1;
+      <div class="graph-wrapper">
+        <div class="weekdays" aria-hidden="true">
+          <div class="weekday"></div>
+          <div class="weekday">M</div>
+          <div class="weekday"></div>
+          <div class="weekday">W</div>
+          <div class="weekday"></div>
+          <div class="weekday">F</div>
+          <div class="weekday"></div>
+        </div>
+        <div class="contributions-graph" id="graph" role="grid" aria-label="GitHub contributions heatmap"></div>
+      </div>
 
-            contributionsArray.forEach(day => {
-                const date = new Date(day.date);
-                const weekNum = getWeekNumber(date);
+      <section class="stats" aria-label="Contribution statistics">
+        <div class="stat-item">
+          <div class="stat-value">${total.toLocaleString()}</div>
+          <div class="stat-label">Total</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">${longest}</div>
+          <div class="stat-label">Longest Streak</div>
+        </div>
+      </section>
+    </div>
+  </div>
+`;
 
-                if (weekNum !== lastWeekNum && currentWeek.length > 0) {
-                    weeks.push(currentWeek);
-                    currentWeek = [];
-                }
+            const mount = document.getElementById('content');
+            mount.innerHTML = html;
 
-                currentWeek.push(day);
-                lastWeekNum = weekNum;
-            });
+            // Render cells
+            const graphEl = document.getElementById('graph');
+            weeks.forEach((week, idx) => {
+                const col = document.createElement('div');
+                col.className = 'week';
 
-            if (currentWeek.length > 0) {
-                weeks.push(currentWeek);
-            }
-
-            // Render weeks
-            weeks.forEach((week, weekIndex) => {
-                html += '<div class="week">';
-
-                // Fill start of first week if needed
-                if (weekIndex === 0) {
-                    const firstDay = new Date(week[0].date).getDay();
-                    for (let i = 0; i < firstDay; i++) {
-                        html += '<div style="width: 10px; height: 10px;"></div>';
+                // Pad beginning of first week up to first day's weekday
+                if (idx === 0) {
+                    const firstDayIdx = new Date(week[0].date).getDay(); // 0=Sun
+                    for (let i = 0; i < firstDayIdx; i++) {
+                        const spacer = document.createElement('div');
+                        spacer.style.width = 'var(--cell)';
+                        spacer.style.height = 'var(--cell)';
+                        col.appendChild(spacer);
                     }
                 }
 
                 week.forEach(day => {
-                    const count = day.count;
-                    const level = getLevel(count, maxCount);
-                    const date = new Date(day.date);
-                    const dateStr = date.toLocaleDateString('en-US', {
-                        month: 'short',
-                        day: 'numeric',
-                        year: 'numeric'
-                    });
+                    const c = day.count || 0;
+                    const lvl = getLevel(c, maxCount);
+                    const dt = new Date(day.date);
+                    const label = dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
-                    html += `<div class="day" data-level="${level}">
-                        <div class="tooltip">${count} contributions on ${dateStr}</div>
-                    </div>`;
+                    const cell = document.createElement('div');
+                    cell.className = 'day';
+                    cell.setAttribute('data-level', lvl);
+                    cell.innerHTML = `<div class="tooltip">${c} contributions on ${label}</div>`;
+                    col.appendChild(cell);
                 });
 
-                html += '</div>';
+                graphEl.appendChild(col);
             });
 
-            html += '</div></div></div></div>';
+            // Months header aligned to week columns
+            buildMonthsHeader(weeks);
 
-            // Add stats
-            html += `<div class="stats">
-                <div class="stat-item">
-                    <div class="stat-value">${totalContributions}</div>
-                    <div class="stat-label">Total</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">${activeDays}</div>
-                    <div class="stat-label">Days</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">${longestStreak}</div>
-                    <div class="stat-label">Streak</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">${(totalContributions / 365).toFixed(1)}</div>
-                    <div class="stat-label">Daily Avg</div>
-                </div>
-            </div>`;
-
-            document.getElementById('content').innerHTML = html;
+            // Size graph to fill width now + on resize
+            const onResize = () => sizeGraph(weeks.length);
+            onResize();
+            window.addEventListener('resize', onResize, { passive: true });
         }
 
+        function computeWeeks(contributions) {
+            const out = [];
+            let cur = [];
+            let last = -1;
+
+            contributions.forEach(d => {
+                const date = new Date(d.date);
+                const wn = getWeekNumber(date);
+                if (wn !== last && cur.length > 0) {
+                    out.push(cur);
+                    cur = [];
+                }
+                cur.push(d);
+                last = wn;
+            });
+            if (cur.length) out.push(cur);
+            return out;
+        }
+
+        function buildMonthsHeader(weeks) {
+            const header = document.getElementById('monthsHeader');
+            const n = weeks.length;
+            header.style.gridTemplateColumns = `repeat(${n}, var(--cell))`;
+
+            const names = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const spans = [];
+            let curMonth = null, span = 0;
+
+            weeks.forEach(week => {
+                const mid = week[Math.min(3, week.length - 1)];
+                const m = new Date(mid.date).getMonth();
+                if (curMonth === null) { curMonth = m; span = 1; }
+                else if (m === curMonth) { span++; }
+                else { spans.push({ m: curMonth, span }); curMonth = m; span = 1; }
+            });
+            if (span > 0) spans.push({ m: curMonth, span });
+
+            spans.forEach(({ m, span }) => {
+                const el = document.createElement('div');
+                el.className = 'month';
+                el.style.gridColumn = `span ${span}`;
+                el.textContent = names[m];
+                header.appendChild(el);
+            });
+        }
+
+        function sizeGraph(weeksCount) {
+            const content = document.querySelector('.graph-content');
+            const weekdays = document.querySelector('.weekdays');
+            const style = getComputedStyle(content);
+
+            const padding = parseFloat(style.paddingLeft || 0) + parseFloat(style.paddingRight || 0);
+            const available = content.clientWidth - padding - (weekdays ? weekdays.offsetWidth : 0) - 8;
+            const gap = 2; // must match --gap
+
+            let cell = Math.floor((available - (weeksCount - 1) * gap) / weeksCount);
+            cell = Math.max(6, Math.min(cell, 18)); // clamp for aesthetics
+
+            document.documentElement.style.setProperty('--cell', `${cell}px`);
+            document.documentElement.style.setProperty('--gap', `${gap}px`);
+        }
+
+        // Week number helper (simple Sun-start week)
         function getWeekNumber(date) {
-            const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
-            const pastDaysOfYear = (date - firstDayOfYear) / 86400000;
-            return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+            const first = new Date(date.getFullYear(), 0, 1);
+            const pastDays = Math.floor((date - first) / 86400000);
+            return Math.ceil((pastDays + first.getDay() + 1) / 7);
         }
 
         function getLevel(count, max) {
             if (count === 0) return 0;
-            const percentage = count / max;
-            if (percentage <= 0.25) return 1;
-            if (percentage <= 0.5) return 2;
-            if (percentage <= 0.75) return 3;
+            const p = count / max;
+            if (p <= 0.25) return 1;
+            if (p <= 0.5) return 2;
+            if (p <= 0.75) return 3;
             return 4;
         }
 
-        // Load on page load
         loadContributions();
     </script>
 </body>

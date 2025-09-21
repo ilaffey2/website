@@ -1,298 +1,420 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-      <!-- Google Fots -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-      <!-- Remixicon Icon -->
-      <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-      <!-- Remixicon Icon -->
-      <!-- Bootstrap CSS -->
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-      <!-- Main CSS -->
-      <link href="assets/css/main.css" rel="stylesheet">
 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Code - Ian Laffey</title>
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap');
 
-    <title>Code - Ian Laffey </title>
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  </head>
-  <body>
+    body {
+      background-color: #2A1F1D;
+      color: #DEC165;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
 
-    <!-- header -->
-    <!-- banner -->
-    <div class="ds-banner">
-      <div class="container">
-        <div class="row">
-          <div class="col-12 col-sm-12 col-md-5 col-lg-6 col-xl-5 col-xxl-6">
-          </div>
-          <div class="">
-            <section>
-              <!-- <h1 class="text-center">Ian Laffey</h1>
-              <figure class="text-center">
-                <img src="assets/images/index/avatar-circular.png">
-              </figure>
-              -->
-              <figure class="text-center" style="padding-top: 6%;">
-                <a href="https://github.com/ilaffey2">
-                <img src="./github-metrics.svg">
-                </a>
-            </figure>
+    ::selection {
+      background: #BE8A13;
+      color: #2A1F1D;
+    }
 
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
 
-                <ul class="ds-numbervalulist">
-                  <li>
-                    <strong>Theseus</strong>
-                    <span>CTO</span>
-                  </li>
-                  <!-- <li>
-                    <strong>BSc.</strong>
-                    <span>McGill University</span>
-                  </li> -->
-                  <!-- <li>
-                    <strong>"1000x Engineer"</strong>
-                    <span>- my friend</span>
-                  </li> -->
-                  <li>
-                    <strong>BSc.</strong>
-                    <span>McGill University</span>
-                  </li>
-                  <!-- <li>
-                    <strong>"10x Engineer"</strong>
-                    <span><a href="https://twitter.com/atbeme/status/1692316019749183544?s=20">@atbeme</a></span>
-                  </li> -->
-                  <!-- <li>
-                    <strong>Software Engineer</strong>
-                    <span>Exact Payments</span>
-                  </li>
-                  <li>
-                    <strong>"Best Intern"</strong>
-                    <span>CI TPO,</span>
-                    <span>Opal-RT Technologies</span>
-                  </li> -->
+    /* GitHub metrics */
+    .github-section {
+      text-align: center;
+      margin-bottom: 60px;
+      padding: 40px 0;
+    }
 
-                </ul>
+    .iframe-wrapper {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
 
-            </section>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- banner -->
+    .github-section iframe {
+      width: 100%;
+      max-width: 1000px;
+      height: 380px;
+      border: none;
+      background: transparent;
+      display: block;
+    }
 
-    <!-- about -->
-    <div class="ds-about-section">
-      <div class="container">
-        <section>
-            <h2 class="ds-heading">About Me</h2>
-            <p>
-               Since the first time I picked up a chess piece, age 4, I have always enjoyed problem solving.<br>
-               I attended McGill University in Montreal, QC where I studied Software Engineering & Economics.<br>
-               I have worked on a variety of projects, from compilers to 3D web apps to robotics.<br> 
-               I have a passion for building things that are creative or practical.<br>
+    /* Stats */
+    .stats-list {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      margin-bottom: 80px;
+      flex-wrap: wrap;
+    }
 
-               <br>
-               I used to believe I needed to write software for websites and apps. <br>
-               Now I build things in the real world. <br>
-               I believe robotics are the logical extension of on-demand intelligence provided by AI.<br>
-            </p>
-        </section>
-      </div>
-    </div>
-    <!-- about -->
+    .stats-list li {
+      list-style: none;
+      text-align: center;
+    }
 
-   
+    .stats-list strong {
+      display: block;
+      font-size: 24px;
+      font-weight: 700;
+      color: #FFCB1B;
+      margin-bottom: 4px;
+    }
 
-   <!--  Work -->
-   <div class="ds-work-section">
-     <div class="container">
-          <h2 class="ds-heading">Things I've made</h2>
-          <div class="ds-work-list-section">
-            Here's all the stuff I made en route to what I <i>really</i> wanted to work on
+    .stats-list span {
+      font-size: 13px;
+      color: #7F6A55;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
 
-            <div class="ds-work-list">
-              <div class="row">
-                  <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-7">
-                      <section>
-                          <h3 class="ds-work-title">Ultra</h3>
-                          <p>Created an AI Enabled email client with <a href="https://f.inc">Founder's Inc</a>
-                            <br/>
-                            Improved significantly in: AI Engineering, Agents and Assistant development,
-                             and LLM Chain-of-Though prompting.
-                          </p>
-                          <a href="https://ultramail.ai" class="ds-button">Website</a>
-                          <a href="https://twitter.com/ultramail_" class="ds-button">Twitter</a>
-                          </a>
+    /* Sections */
 
-                      </section>
-                  </div>
-                  <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 col-xxl-5">
-                      <figure><img src="https://app.ultramail.ai/og.png"></figure>
-                  </div>
-              </div>
-            </div>
-            <div class="ds-work-list">
-              <div class="row">
-                  <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-7">
-                      <section>
-                          <h3 class="ds-work-title">CopyCat</h3>
-                          <p>Started as a b2c AI meme generator<br> Pivoted to AI PowerPoint presentations. <br>
-                            1,500 users in &lt; 24 hours
-                          </p>
-                          <a href="https://create.copycat.actor" class="ds-button">Website</a>
-                          <a href="https://twitter.com/greeneggshamed/status/1668787341199290368?s=20" class="ds-button">b2c demo</a>
-                          <a href="https://twitter.com/greeneggshamed/status/1673392754376966145?s=20" class="ds-button">b2b demo</a>
-                          </a>
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #BE8A13;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #7F6A55;
+      padding-bottom: 8px;
+      display: inline-block;
+    }
 
-                      </section>
-                  </div>
-                  <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 col-xxl-5">
-                      <figure><img src="assets/images/index/copycat.png"></figure>
-                  </div>
-              </div>
-            </div>
-            <div class="ds-work-list">
-              <div class="row">
-                  <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-7">
-                      <section>
-                          <h3 class="ds-work-title">Garden</h3>
-                          <p>I founded a company with one of my<a href="https://www.sachalevy.fr/"> best friends.</a><br>
-                            Mined over 400 million tweets<br>Spent 4 grand on AWS<br>Got over 4 users
-                          </p>
-                          <a href="./garden.html" class="ds-button">post-mortum</a>
-                          </a>
+    .section-intro {
+      font-size: 14px;
+      color: #BFC65A;
+      margin-bottom: 40px;
+      font-style: italic;
+    }
 
-                      </section>
-                  </div>
-                  <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 col-xxl-5">
-                      <figure><img src="assets/images/index/garden-logo.png"></figure>
-                  </div>
-              </div>
-            </div>
-           
-<!--  Work -->
+    /* About section */
+    .about-text {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #DEC165;
+      max-width: 800px;
+    }
+
+    .about-text br {
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    /* Work items */
+    .work-item {
+      display: grid;
+      gap: 40px;
+      margin-bottom: 60px;
+      padding: 30px;
+      background: rgba(42, 31, 29, 0.3);
+      /* border: 1px solid #7F6A55; */
+      align-items: center;
+      position: relative;
+    }
+
+    .work-item:nth-child(even) {
+      background: rgba(42, 31, 29, 0.5);
+    }
+
+    .work-content h3 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #FFEAA3;
+      margin-bottom: 16px;
+    }
+
+    .work-content p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #DEC165;
+      margin-bottom: 20px;
+    }
+
+    a {
+      color: #7CC9CF;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .work-content a:hover {
+      color: #FFCB1B;
+    }
+
+    .work-image {
+      text-align: center;
+    }
+
+    .work-image img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #7F6A55;
+      filter: brightness(0.95) contrast(1.05);
+      border-radius: 8px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .work-image img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Special style for Garden */
+    .work-image.garden img {
+      width: 110%;
+      max-width: 1100px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+      position: relative;
+      left: -5%;
+    }
+
+    /* Buttons */
+    .button {
+      display: inline-block;
+      padding: 10px 24px;
+      background: transparent;
+      color: #E6A96B;
+      border: 1px solid #E6A96B;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      transition: all 0.2s ease;
+      margin-right: 12px;
+      margin-top: 8px;
+    }
+
+    .button:hover {
+      background: #BE8A13;
+      color: #2A1F1D;
+      border-color: #BE8A13;
+    }
+
+    /* Back button */
+    .nav-section {
+      margin-top: 80px;
+      padding-top: 40px;
+      border-top: 1px solid #7F6A55;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .work-item {
+        grid-template-columns: 1fr;
+        padding: 20px;
+      }
+
+      .work-image {
+        order: -1;
+        margin-bottom: 20px;
+      }
+
+      .work-image.garden img {
+        width: 100%;
+        left: 0;
+      }
+
+      .github-section iframe {
+        height: 320px;
+      }
+    }
+
+    /* Special Garden layout */
+    .work-item.garden {
+      grid-template-columns: 1fr;
+      /* single column */
+      text-align: center;
+    }
+
+    .work-item.garden .gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      /* space between images */
+      margin-top: 20px;
+    }
+
+    .work-item.garden .gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      object-fit: cover;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .work-item.garden .gallery img:hover {
+      transform: scale(1.01);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    }
+
+    .work-embed {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .work-embed iframe {
+      width: 100%;
+      height: 380px;
+      border: none;
+      background: transparent;
+      border: 1px solid #7F6A55;
+      border-radius: 8px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+  </style>
+</head>
+
+<body>
   <div class="container">
 
-       <div class="ds-work-list-section">
-          <div class="ds-work-list">
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-7">
-                    <section>
-                        <h3 class="ds-work-title">The Stable</h3>
-                        <p>Spec Ad/Christmas gift to my dad.<br>
-                          Built using Three JS + Unity with <a href="https://needle.tools?" >Needle
-                          <br>Check out the Awards page!
-                        </p>
-                        <a href="https://www.xmas.ilaffey.com" class="ds-button">Check it out</a>
-                        </a>
+    <!-- About -->
+    <div class="section">
+      <h2 class="section-title">work</h2>
+      <p class="section-intro">Some things I am proud of</p>
+    </div>
 
-                    </section>
-                </div>
-                <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 col-xxl-5">
-                    <figure><img src="assets/images/index/stable.png"></figure>
-                </div>
-            </div>
-          </div>
- </div> 
- 
-         <div class="ds-work-list">
-           <div class="row">
-               <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-7">
-                   <section>
-                     <a id="1">
-                       <h3 class="ds-work-title">Exact Developer</h3>
-                       <p>Led the creation of the Developer Portal 2.0 at Exact Payments.
-                       <br>Worked closely with CEO while leading developers and UI team.
-                       <br>Landing Page, Three-Panel API Reference, Guides, Discussions.
-                         </p>
-                       <a href="https://developer.exactpay.com" class="ds-button">Website</a>
-                     </a>
-                   </section>
-               </div>
-               <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 col-xxl-5">
 
-                   <figure><img src="assets/images/index/exact.jpg"></figure>
 
-               </div>
-           </div>
-         </div>
-         <div class="ds-work-list">
-          <div class="row">
-              <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-7">
-                  <section>
-                    <a id="1">
-                      <h3 class="ds-work-title">ExactJS Merchant Demo</h3>
-                      <p>Contributed directly to the sales process.
-                      <br>Worked closely with CSO, VP PayFac, and Customers.
-                      <br>Site, Guides, Diagrams, Demos.
-                      <br>This kinda stuff took longer before ChatGPT, okay?
 
-                        </p>
-                      <a href="https://github.com/exact-payments/next-merchant-demo" class="ds-button">Github</a>
-                    </a>
-                  </section>
-              </div>
-              <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 col-xxl-5">
 
-                  <figure><img src="assets/images/index/exactjs.png"></figure>
+    <!-- Work -->
+    <div class="section">
 
-              </div>
+      <div class="work-item">
+        <div class="work-content">
+          <h3>Ultra</h3>
+          <p>
+            Created an AI Enabled email client in the <a href="https://f.inc">Founder's Inc</a> Studio. As of September
+            2025, <a href="https://ultramail.ai">the website</a> is still up, but the app is no longer available.
+          </p>
+
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-content">
+          <h3>Garden</h3>
+          <p>
+            Mined half a billion tweets and made some cool visualizations with it.
+          </p>
+        </div>
+
+        <div class="work-item garden">
+
+          <div class="gallery">
+            <img src="assets/images/garden/fullsize.png" alt="Garden visualization 1">
+            <p class="section-intro">Some pre-GPT semantic analysis on tweets.</p>
+
+            <img src="assets/images/garden/flower.png" alt="Garden visualization 2">
+            <p class="section-intro">Twitter connection graph.
+              &nbsp; &nbsp; <a href="https://x.com/ilaffey2/status/1645962525349928965"> Video in 3d</a>
+            </p>
           </div>
         </div>
-  </div> 
-     <!--  Work -->
-<div class="ds-work-section">
-    <div class="container">
-           <div class="ds-work-list">
-             <div class="row">
-                 <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-7">
-                     <section>
-                       <a id="1">
-                         <h3 class="ds-work-title">C Compiler</h3>
-                         <p>
-                          Worse than gcc but it works! </p>
-                         <a href="compiler.html" class="ds-button">Details</a>
-                       </a>
-                     </section>
-                 </div>
-                 <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 col-xxl-5">
+      </div>
 
-                     <figure><img src="assets/images/compiler/icon.png"></figure>
-
-                 </div>
-             </div>
-           </div>
-
-    </div> 
+      <!-- GitHub Stats -->
+      <div class="work-item">
+        <div class="work-content">
+          <h3>San Francisco</h3>
+          <p>
+            The year I moved to San Francisco, visualized in git commits.
+            I genuinely believe that if you work hard enough, you are bound to succeed. I wrote more code than
+            I have in any other year. 3103 commits is all it takes to change your life.
+          </p>
+        </div>
+        <div class="work-embed">
+          <iframe src="./github-contributions.html" scrolling="no"></iframe>
+        </div>
+      </div>
 
 
-  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
-    <div style="padding-left: 5%; padding-bottom: 5%;">
-      <a href="./index.html" class="ds-button">Back to main page</a>
+      <div class="work-item">
+        <div class="work-content">
+          <h3>The Stable</h3>
+          <p>
 
+            ThreeJS site I built using <a href=https://needle.tools> Needle </a> for my dad as a christmas gift.
+            It is a 3d recreation of his <a href="https://thestable.tv"> site </a>
+            which I thought was cool growing up.
+            <br />
+          </p>
+        </div>
+
+
+        <div class="work-item garden">
+
+          <div class="gallery">
+            <img src="assets/images/index/stable.png" alt="Exact Developer">
+            <p class="section-intro">I have always loved threeJS and low-poly
+              design.</p>
+            <a href="./stable-main/app/public/index.html">Stable3D</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-content">
+          <h3>Exact Payments</h3>
+          <p>
+            Wrote a lot of customer facing code for Exact Payments, the first company I worked at.
+            I created our developer portal as well as a merchant demo site for Exact Payments, showing how to integrate
+            with their API.
+            This was my first job, and I liked talking to customers and helping our sales team close deals.
+          </p>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-content">
+          <h3>C Compiler</h3>
+          <p>
+            Worse than gcc but it works!
+          </p>
+          <a href="compiler.html">Write up</a>
+        </div>
+      </div>
+      <div class="work-item">
+        <div class="work-content">
+          <h3>Music</h3>
+          <p>
+            I've been making music since I was 16. I've made a lot a lot a lot of music and released a bit of it.
+          </p>;
+          <a href="music.html">Music</a>
+
+        </div>
+      </div>
     </div>
-    
+
+
+    <!-- Navigation -->
+    <div class="nav-section">
+      <a href="./index.html" class="button">Back to main page</a>
+    </div>
   </div>
-  
+</body>
 
-   <!-- Experience -->
-   <!--  footer -->
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    -->
-    <script src="assets/js/main.js"></script>
-  </body>
 </html>
