@@ -1,0 +1,570 @@
+// Create the graph
+            const graphContainer = document.getElementById('contributionsGraph');
+            graphContainer.innerHTML = '';
+
+            // Check if we have any contributions
+            if (totalContributions === 0) {
+                graphContainer.innerHTML = '<div style="text-align: center; padding: 40px; color: #7F6A55;">No contributions found for 2023. Try loading data from a different year.</div>';
+                
+                // Still show the stats even if zero
+                const statsDiv = document.getElementById('stats');
+                statsDiv.innerHTML = `
+                    <div class="stat-item">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">Total Contributions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">Active Days</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">Longest Streak</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">Daily Average</div>
+                    </div>
+                `;
+                
+                document.getElementById('graphContainer').style.display = 'block';
+                return;
+            }
+
+            // Create<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Contributions 2023</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #2A1F1D;
+            color: #DEC165;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #FFCB1B;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #7F6A55;
+            letter-spacing: 0.05em;
+        }
+
+        .file-input-container {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            border: 2px dashed #7F6A55;
+            border-radius: 8px;
+            background: rgba(42, 31, 29, 0.5);
+        }
+
+        .file-input-label {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #BE8A13;
+            color: #2A1F1D;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+
+        .file-input-label:hover {
+            background: #FFCB1B;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .graph-container {
+            background: rgba(42, 31, 29, 0.3);
+            border: 1px solid #7F6A55;
+            padding: 30px;
+            border-radius: 8px;
+            overflow-x: auto;
+            display: none;
+        }
+
+        .months-header {
+            display: flex;
+            margin-bottom: 8px;
+            margin-left: 32px;
+            font-size: 12px;
+            color: #7F6A55;
+        }
+
+        .month {
+            flex: 1;
+            text-align: left;
+        }
+
+        .graph-wrapper {
+            display: flex;
+            gap: 16px;
+        }
+
+        .weekdays {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            font-size: 10px;
+            color: #7F6A55;
+            width: 32px;
+        }
+
+        .weekday {
+            height: 11px;
+            display: flex;
+            align-items: center;
+        }
+
+        .contributions-graph {
+            display: flex;
+            gap: 3px;
+        }
+
+        .week {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .day {
+            width: 11px;
+            height: 11px;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .day:hover {
+            outline: 2px solid #FFCB1B;
+            outline-offset: 2px;
+        }
+
+        /* Contribution levels */
+        .day[data-level="0"] { background: #3B302D; }
+        .day[data-level="1"] { background: #7F6A55; }
+        .day[data-level="2"] { background: #BE8A13; }
+        .day[data-level="3"] { background: #E6A96B; }
+        .day[data-level="4"] { background: #FFCB1B; }
+
+        .tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #131516;
+            color: #DEC165;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            z-index: 10;
+            margin-bottom: 8px;
+            border: 1px solid #7F6A55;
+        }
+
+        .day:hover .tooltip {
+            opacity: 1;
+        }
+
+        .stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid #7F6A55;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #FFCB1B;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #7F6A55;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .legend {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #7F6A55;
+        }
+
+        .legend-item {
+            width: 11px;
+            height: 11px;
+            border-radius: 2px;
+        }
+
+        .error {
+            color: #D6262B;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0;
+            }
+            
+            .graph-container {
+                padding: 16px;
+            }
+
+            .contributions-graph {
+                gap: 2px;
+            }
+
+            .day {
+                width: 8px;
+                height: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">GITHUB CONTRIBUTIONS</h1>
+            <p class="subtitle">@ilaffey2</p>
+            <p style="margin-top: 8px; font-size: 12px; color: #BE8A13;">
+                <select id="yearSelect" style="background: #2A1F1D; color: #DEC165; border: 1px solid #7F6A55; padding: 4px 8px; font-family: inherit; font-size: 12px;">
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                    <option value="2019">2019</option>
+                    <option value="2018">2018</option>
+                </select>
+            </p>
+        </div>
+
+        <div class="file-input-container">
+            <label for="fileInput" class="file-input-label">
+                Load contributions.json
+            </label>
+            <input type="file" id="fileInput" accept=".json">
+            <p style="margin-top: 16px; font-size: 12px; color: #7F6A55;">
+                Select your contributions.json file to visualize 2023 activity
+            </p>
+        </div>
+
+        <div class="graph-container" id="graphContainer">
+            <div class="months-header" id="monthsHeader"></div>
+            <div class="graph-wrapper">
+                <div class="weekdays">
+                    <div class="weekday"></div>
+                    <div class="weekday">M</div>
+                    <div class="weekday"></div>
+                    <div class="weekday">W</div>
+                    <div class="weekday"></div>
+                    <div class="weekday">F</div>
+                    <div class="weekday"></div>
+                </div>
+                <div class="contributions-graph" id="contributionsGraph"></div>
+            </div>
+            <div class="legend">
+                <span>Less</span>
+                <div class="legend-item" style="background: #3B302D;"></div>
+                <div class="legend-item" style="background: #7F6A55;"></div>
+                <div class="legend-item" style="background: #BE8A13;"></div>
+                <div class="legend-item" style="background: #E6A96B;"></div>
+                <div class="legend-item" style="background: #FFCB1B;"></div>
+                <span>More</span>
+            </div>
+            <div class="stats" id="stats"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        let jsonText = e.target.result;
+                        
+                        // Debug: Log first 500 chars to see structure
+                        console.log('First 500 chars of file:', jsonText.substring(0, 500));
+                        
+                        // Clean up the JSON if needed (handle partial data)
+                        jsonText = jsonText.trim();
+                        if (jsonText.startsWith(',')) {
+                            jsonText = '[' + jsonText + ']';
+                        } else if (!jsonText.startsWith('[') && !jsonText.startsWith('{')) {
+                            jsonText = '[' + jsonText + ']';
+                        }
+                        
+                        const data = JSON.parse(jsonText);
+                        console.log('Parsed data type:', Array.isArray(data) ? 'array' : 'object');
+                        console.log('First few items:', data.slice ? data.slice(0, 5) : data);
+                        
+                        displayContributions(data.data);
+                    } catch (err) {
+                        console.error('Parse error:', err);
+                        alert('Error parsing JSON file: ' + err.message + '\n\nPlease make sure the file contains valid JSON data.');
+                    }
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        function displayContributions(data) {
+            // Get selected year
+            const selectedYear = document.getElementById('yearSelect').value;
+            
+            let contributionsArray = [];
+            
+            // Handle GitHub API format
+            if (data.user && data.user.contributionsCollection && 
+                data.user.contributionsCollection.contributionCalendar && 
+                data.user.contributionsCollection.contributionCalendar.weeks) {
+                
+                // Flatten the weeks array to get all contribution days
+                const weeks = data.user.contributionsCollection.contributionCalendar.weeks;
+                weeks.forEach(week => {
+                    if (week.contributionDays) {
+                        week.contributionDays.forEach(day => {
+                            contributionsArray.push({
+                                date: day.date,
+                                count: day.contributionCount,
+                                color: day.color,
+                                intensity: day.contributionCount > 0 ? Math.min(4, Math.ceil(day.contributionCount / 10)) : 0
+                            });
+                        });
+                    }
+                });
+                
+                console.log('Extracted contributions from GitHub API format:', contributionsArray.length);
+            }
+            // Handle direct array format
+            else if (Array.isArray(data)) {
+                contributionsArray = data;
+            }
+            // Handle object with contributions property
+            else if (data.contributions && Array.isArray(data.contributions)) {
+                contributionsArray = data.contributions;
+            }
+            else {
+                alert('Unsupported data format');
+                console.log('Data structure:', data);
+                return;
+            }
+            
+            // Filter for selected year data only
+            const contributionsYear = contributionsArray.filter(item => item.date && item.date.startsWith(selectedYear + '-'));
+            
+            if (contributionsYear.length === 0) {
+                const graphContainer = document.getElementById('contributionsGraph');
+                graphContainer.innerHTML = `<div style="text-align: center; padding: 40px; color: #7F6A55;">No contributions found for ${selectedYear}. Try selecting a different year.</div>`;
+                
+                // Still show zero stats
+                const statsDiv = document.getElementById('stats');
+                statsDiv.innerHTML = `
+                    <div class="stat-item">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">Total Contributions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">Active Days</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">Longest Streak</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">Daily Average</div>
+                    </div>
+                `;
+                
+                document.getElementById('graphContainer').style.display = 'block';
+                return;
+            }
+
+            // Group by week
+            const weeks = {};
+            let maxCount = 0;
+            let totalContributions = 0;
+            let activeDays = 0;
+            let currentStreak = 0;
+            let longestStreak = 0;
+            let tempStreak = 0;
+
+            contributionsYear.forEach(day => {
+                const date = new Date(day.date);
+                const weekNumber = getWeekNumber(date);
+                
+                if (!weeks[weekNumber]) {
+                    weeks[weekNumber] = [];
+                }
+                
+                weeks[weekNumber].push(day);
+                const count = parseInt(day.count) || 0; // Ensure count is a number
+                maxCount = Math.max(maxCount, count);
+                totalContributions += count;
+                
+                if (count > 0) {
+                    activeDays++;
+                    tempStreak++;
+                    longestStreak = Math.max(longestStreak, tempStreak);
+                } else {
+                    tempStreak = 0;
+                }
+            });
+
+            // Create the graph
+            const graphContainer = document.getElementById('contributionsGraph');
+            graphContainer.innerHTML = '';
+
+            // Create months header
+            const monthsHeader = document.getElementById('monthsHeader');
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            monthsHeader.innerHTML = months.map(m => `<div class="month">${m}</div>`).join('');
+
+            // Sort weeks and create graph
+            const sortedWeeks = Object.keys(weeks).sort((a, b) => a - b);
+            
+            sortedWeeks.forEach(weekNum => {
+                const weekDiv = document.createElement('div');
+                weekDiv.className = 'week';
+                
+                // Sort days in week by day of week
+                const weekDays = weeks[weekNum].sort((a, b) => {
+                    return new Date(a.date).getDay() - new Date(b.date).getDay();
+                });
+                
+                // Fill in empty days at start of week
+                const firstDay = new Date(weekDays[0].date).getDay();
+                for (let i = 0; i < firstDay; i++) {
+                    const emptyDay = document.createElement('div');
+                    weekDiv.appendChild(emptyDay);
+                }
+                
+                weekDays.forEach(day => {
+                    const dayDiv = document.createElement('div');
+                    dayDiv.className = 'day';
+                    const count = parseInt(day.count) || 0;
+                    const level = getLevel(count, maxCount);
+                    dayDiv.setAttribute('data-level', level);
+                    
+                    // Add tooltip
+                    const tooltip = document.createElement('div');
+                    tooltip.className = 'tooltip';
+                    const date = new Date(day.date);
+                    const dateStr = date.toLocaleDateString('en-US', { 
+                        month: 'short', 
+                        day: 'numeric',
+                        year: 'numeric'
+                    });
+                    tooltip.textContent = `${count} contributions on ${dateStr}`;
+                    dayDiv.appendChild(tooltip);
+                    
+                    weekDiv.appendChild(dayDiv);
+                });
+                
+                graphContainer.appendChild(weekDiv);
+            });
+
+            // Display stats
+            const statsDiv = document.getElementById('stats');
+            const daysInYear = selectedYear % 4 === 0 ? 366 : 365; // Account for leap years
+            statsDiv.innerHTML = `
+                <div class="stat-item">
+                    <div class="stat-value">${totalContributions}</div>
+                    <div class="stat-label">Total Contributions</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${activeDays}</div>
+                    <div class="stat-label">Active Days</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${longestStreak}</div>
+                    <div class="stat-label">Longest Streak</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${(totalContributions / daysInYear).toFixed(1)}</div>
+                    <div class="stat-label">Daily Average</div>
+                </div>
+            `;
+
+            // Show the graph
+            document.getElementById('graphContainer').style.display = 'block';
+        }
+        
+        // Year selector change handler
+        document.getElementById('yearSelect').addEventListener('change', function() {
+            const fileInput = document.getElementById('fileInput');
+            if (fileInput.files.length > 0) {
+                // Re-process the file with the new year
+                fileInput.dispatchEvent(new Event('change'));
+            }
+        });
+
+        function getWeekNumber(date) {
+            const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
+            const pastDaysOfYear = (date - firstDayOfYear) / 86400000;
+            return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+        }
+
+        function getLevel(count, max) {
+            if (count === 0) return 0;
+            const percentage = count / max;
+            if (percentage <= 0.25) return 1;
+            if (percentage <= 0.5) return 2;
+            if (percentage <= 0.75) return 3;
+            return 4;
+        }
+    </script>
+</body>
+</html>
