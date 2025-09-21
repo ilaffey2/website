@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" href="./assets/favicon.04a55d37.png">
@@ -9,16 +10,15 @@
   <meta name="description" content="🐴 The Stable Visual Effects">
   <meta property="og:title" content="🐴 The Stable" />
   <meta property="og:description" content="🐴 The Stable Visual Effects" />
-  <meta property="og:image" content="https://cdn.glitch.global/15c05801-a04e-47bf-ba37-14020ca2fe09/og.png?v=1672793832484"/?
-  
-
-  <meta property="twitter:image" content="" />
+  <meta property="og:image"
+    content="https://cdn.glitch.global/15c05801-a04e-47bf-ba37-14020ca2fe09/og.png?v=1672793832484" /? <meta
+    property="twitter:image" content="" />
   <meta property="og:image" content="" />
 
   <meta name="robots" content="index,follow">
   <meta name="url" content="http://needle.tools">
 
-  
+
   <!-- <a href="https://www.flaticon.com/free-animated-icons/horse" title="horse animated icons">Horse animated icons created by Freepik - Flaticon</a> -->
   <style>
     html {
@@ -26,33 +26,33 @@
 
     }
 
-    a{
-      color: #00eaff 
+    a {
+      color: #00eaff
     }
 
     @font-face {
-  font-family: header;
-  src: url(./assets/header.21917d25.ttf);
-  color: white;
+      font-family: header;
+      src: url(./assets/header.21917d25.ttf);
+      color: white;
 
     }
 
     @font-face {
-  font-family: header2;
-  src: url(./assets/header2.08691bab.otf);
+      font-family: header2;
+      src: url(./assets/header2.08691bab.otf);
 
     }
 
     body {
       background: linear-gradient(0deg, #0F1D33 0%, #0F2F43 100vh);
-      height:360%;
+      height: 360%;
       background-repeat: no-repeat;
       background-attachment: fixed;
       overflow-y: scroll;
       overflow-x: hidden;
     }
 
-    
+
 
     div.container {
       display: flex;
@@ -77,9 +77,9 @@
     .content.small {
       width: 50vw;
       height: 50vh;
-    }©
+    }
 
-    .content.wide {
+    © .content.wide {
       width: 90vw;
       height: 70vh;
     }
@@ -87,10 +87,11 @@
     needle-engine {
       position: relative;
       border-radius: 30px;
-      overflow:hidden;
+      overflow: hidden;
       box-shadow: 5px 5px 20px 0px rgb(8 52 2 / 32%);
       flex-grow: 1;
-      transform: translateX(0); /* Webkit needs this for round corners */
+      transform: translateX(0);
+      /* Webkit needs this for round corners */
       position: fixed;
     }
 
@@ -111,145 +112,150 @@
     }
 
     ul {
-  list-style-type: none;
-  height: 10vh;
-  overflow: hidden;
-  background-color: #333;
-}
+      list-style-type: none;
+      height: 10vh;
+      overflow: hidden;
+      background-color: #333;
+    }
 
-.h1-1 {
-  font-size: 109px;
-  margin-top: -35vh;
-  font-family: header;
-  color:white;
-}
-.h2-1 {
+    .h1-1 {
+      font-size: 109px;
+      margin-top: -35vh;
+      font-family: header;
+      color: white;
+    }
 
-  font-size: 60px;
-  margin-top: -10%;
-  font-family: header;
-  font-family: header2;
-  color:white;
+    .h2-1 {
 
-}
-.h1-2 {
-  top: 100vh;
-  font-size: 109px;
-  font-family: header;
-  color:white;
+      font-size: 60px;
+      margin-top: -10%;
+      font-family: header;
+      font-family: header2;
+      color: white;
 
-}
-.h2-2 {
-  font-size: 60px;
-  font-family: header2;
-  color:white;
+    }
 
-}
-.h3-2 {
-  font-size: 40px;
-  padding-bottom: 10%;
-  font-family: Arial, Helvetica, sans-serif;
-  color:white;
+    .h1-2 {
+      top: 100vh;
+      font-size: 109px;
+      font-family: header;
+      color: white;
 
-}
+    }
 
-.scrollparagraph{
-  position: relative;
-  font-size: 40px;
-  top: 55vh;
-  font-family: Arial, Helvetica, sans-serif;
-  color:white;
+    .h2-2 {
+      font-size: 60px;
+      font-family: header2;
+      color: white;
+
+    }
+
+    .h3-2 {
+      font-size: 40px;
+      padding-bottom: 10%;
+      font-family: Arial, Helvetica, sans-serif;
+      color: white;
+
+    }
+
+    .scrollparagraph {
+      position: relative;
+      font-size: 40px;
+      top: 55vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: white;
 
 
-}
+    }
 
-.workheader{
-  position:absolute;
-  font-size: 102px;
-  top:300vh;
-  font-family: header;
-  left:.5vw;
-  color:white;
+    .workheader {
+      position: absolute;
+      font-size: 102px;
+      top: 300vh;
+      font-family: header;
+      left: .5vw;
+      color: white;
 
-}
+    }
 
-.secondpage {
-  position: relative;
-  top:4vh;
-}
+    .secondpage {
+      position: relative;
+      top: 4vh;
+    }
 
-.thirdpage {
-  position: sticky;
- top: 0;
-}
+    .thirdpage {
+      position: sticky;
+      top: 0;
+    }
 
-.cube {
-  /* transform: scaleX(1.2) scaleY(0.6) scaleZ(1) rotateX(-5deg) rotateY(-10deg) rotateZ(3deg) translateX(-1px) translateY(15px) translateZ(7px) skewX(0deg) skewY(0deg); */
-  transform: scaleX(1.5) scaleY(0.8) scaleZ(1) rotateX(-5deg) rotateY(-10deg) rotateZ(3deg) translateX(0px) translateY(0px) translateZ(0px) skewX(2deg) skewY(0deg);
+    .cube {
+      /* transform: scaleX(1.2) scaleY(0.6) scaleZ(1) rotateX(-5deg) rotateY(-10deg) rotateZ(3deg) translateX(-1px) translateY(15px) translateZ(7px) skewX(0deg) skewY(0deg); */
+      transform: scaleX(1.5) scaleY(0.8) scaleZ(1) rotateX(-5deg) rotateY(-10deg) rotateZ(3deg) translateX(0px) translateY(0px) translateZ(0px) skewX(2deg) skewY(0deg);
 
-}
-.cube-wrap {
-  position: relative;
-  top:40vh;
-  left: calc(1170- 2/1vh);
-  perspective: 502px;
-  perspective-origin: 25% 25%;
-}
+    }
 
-.hidden {
-  display: none
-}
+    .cube-wrap {
+      position: relative;
+      top: 40vh;
+      left: calc(1170- 2/1vh);
+      perspective: 502px;
+      perspective-origin: 25% 25%;
+    }
 
-.iframewrapper{
+    .hidden {
+      display: none
+    }
 
-  position: relative;
-  left:23vw
-}
+    .iframewrapper {
 
-.keepscroll{
-  position: relative;
-  top:40vh;
-  font-size: 60px;
-  font-family: header2;
-  color:white;
-  color:white;
+      position: relative;
+      left: 23vw
+    }
 
-}
+    .keepscroll {
+      position: relative;
+      top: 40vh;
+      font-size: 60px;
+      font-family: header2;
+      color: white;
+      color: white;
 
-.horsey{
-  position: fixed;
-  top:3vh;
-  left: 66vw;
-  z-index: 10;
-  height:100vh;
-  transform: translate(-50%, 0%); 
-}
+    }
 
-.clicker{
-  position: fixed;
-  top: 0;
-  left: 66vw;
-  height: 100vh;
-  width: 34vw;
-}
+    .horsey {
+      position: fixed;
+      top: 3vh;
+      left: 66vw;
+      z-index: 10;
+      height: 100vh;
+      transform: translate(-50%, 0%);
+    }
 
-li {
-  float: left;
-}
+    .clicker {
+      position: fixed;
+      top: 0;
+      left: 66vw;
+      height: 100vh;
+      width: 34vw;
+    }
 
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+    li {
+      float: left;
+    }
 
-}
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
 
-/* Change the link color to #111 (black) on hover */
-li a:hover {
-  background-color: #111;
-}
+    }
+
+    /* Change the link color to #111 (black) on hover */
+    li a:hover {
+      background-color: #111;
+    }
   </style>
   <script type="module" crossorigin src="./assets/index.0c448428.js"></script>
   <link rel="stylesheet" href="./assets/index.2d9a57e5.css">
@@ -261,149 +267,150 @@ li a:hover {
     window.global = window;
     var parcelRequire;
   </script>
-  
-  
+
+
 
   <div class="container">
-    <div class ="headerbox">
-    <h1 class="h1-1">The Stable</h1>
-    <h2 class="h2-1">Visual Effects</h2>
+    <div class="headerbox">
+      <h1 class="h1-1">The Stable</h1>
+      <h2 class="h2-1">Visual Effects</h2>
     </div>
     <div class="content">
-      <div id = "needlewrapper">
-      <needle-engine id="needle-engine"></needle-engine>
+      <div id="needlewrapper">
+        <needle-engine id="needle-engine"></needle-engine>
 
       </div>
-      
+
     </div>
   </div>
   <div class="container">
-        <div class ="headerbox">
-          <div class="secondpage"> 
-            <h1 class="h1-2" id="info">The Info</h1>
-            <h2 class="h2-2">Contact:</h2>
-            <h3 class="h3-2">info@TheStable.tv</h3>
-            
-            <h2 class="h2-2">Employment:</h2>
-            <h3 class="h3-2">jobs@TheStable.tv</h3>
+    <div class="headerbox">
+      <div class="secondpage">
+        <h1 class="h1-2" id="info">The Info</h1>
+        <h2 class="h2-2">Contact:</h2>
+        <h3 class="h3-2">info@TheStable.tv</h3>
 
-            <h2 class="h2-2">Telephone:</h2>
-            <h3 class="h3-2">314-307-7079</h3> 
+        <h2 class="h2-2">Employment:</h2>
+        <h3 class="h3-2">jobs@TheStable.tv</h3>
 
-            
+        <h2 class="h2-2">Telephone:</h2>
+        <h3 class="h3-2">314-307-7079</h3>
 
-          </div>
-        
 
-        </div>
-        <div class="content">
-          
-        </div>
-        <!-- <div class="anchor"> -->
-        <!-- <div id="horsey" class="hidden">
+
+      </div>
+
+
+    </div>
+    <div class="content">
+
+    </div>
+    <!-- <div class="anchor"> -->
+    <!-- <div id="horsey" class="hidden">
           <img id="svg" src="./horse.gif">
             </div>
           </div> -->
   </div>
-  
+
   <div>
-    <h2  class="keepscroll">At The Stable<br> we're proud<br> of what we do.</h2>
+    <h2 class="keepscroll">At The Stable<br> we're proud<br> of what we do.</h2>
 
   </div>
-  
+
   <div class="container">
     <div class="thirdpage">
-    <div class ="headerbox">
+      <div class="headerbox">
 
-        
 
-    
 
-    </div>
-    <div class="content">
-      <div class="iframewrapper">
-      <div id="iframewrapper" class="hidden">
-      <div class="cube-wrap">
-        <!--video id="reel" class="cube" width=275 height=350 src="https://thestable.tv/TheStableReelB.mov" preload="auto" controls allowfullscreen frameBorder="0">
-        </video-->
+
 
       </div>
-    </div>
-    <!-- <div class="">
+      <div class="content">
+        <div class="iframewrapper">
+          <div id="iframewrapper" class="hidden">
+            <div class="cube-wrap">
+              <!--video id="reel" class="cube" width=275 height=350 src="https://thestable.tv/TheStableReelB.mov" preload="auto" controls allowfullscreen frameBorder="0">
+        </video-->
+
+            </div>
+          </div>
+          <!-- <div class="">
       <video id="foo" src="./TheStableReelB.mov" controls allowFullscreen></video>
     </div> -->
+        </div>
+      </div>
     </div>
-    </div>
+    <h1 id="workheader" class="workheader" id="info"><br>(+ <a href="../../../stable-awards/app/public/index.html">the
+        awards</a>)</h1>
+
+
+
   </div>
-  <h1 id="workheader" class="workheader" id="info"><br>(+ <a href="https://www.awards.ilaffey.com/">the awards</a>)</h1>
 
-
-
-</div>
-    
-<!-- please lord forgive me for what i am about to do with this-->
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  <!-- please lord forgive me for what i am about to do with this-->
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
 
   <script>
-    
+
     // addEvent function by John Resig:
     // http://ejohn.org/projects/flexible-javascript-events/
-    
-    function addEvent( obj, type, fn ) {
-    
-        if ( obj.attachEvent ) {
-    
-            obj['e'+type+fn] = fn;
-            obj[type+fn] = function(){obj['e'+type+fn]( window.event );};
-            obj.attachEvent( 'on'+type, obj[type+fn] );
-        } else {
-            obj.addEventListener( type, fn, false );
-        }
+
+    function addEvent(obj, type, fn) {
+
+      if (obj.attachEvent) {
+
+        obj['e' + type + fn] = fn;
+        obj[type + fn] = function () { obj['e' + type + fn](window.event); };
+        obj.attachEvent('on' + type, obj[type + fn]);
+      } else {
+        obj.addEventListener(type, fn, false);
+      }
     }
     //INFLECTION POINT x=12.5 z=8
-      //865 Y with window inner height 1079
-      //This should be location of second screen.
-      //Actually right spot at 1116
-      //so 1116 Y = 12.5x & 8z 
-      //initial x = -4.74
-      //new x func = 17.24 = 1.03windowInnerHeight(y)
-      //initial z = 6.60
-      //new z func = 1.4 = 1.03windowInnerHeight(y)
-      //We can standardize Y scroll
-      //Second screen pos - 103%
+    //865 Y with window inner height 1079
+    //This should be location of second screen.
+    //Actually right spot at 1116
+    //so 1116 Y = 12.5x & 8z 
+    //initial x = -4.74
+    //new x func = 17.24 = 1.03windowInnerHeight(y)
+    //initial z = 6.60
+    //new z func = 1.4 = 1.03windowInnerHeight(y)
+    //We can standardize Y scroll
+    //Second screen pos - 103%
     function getScrollY() {
-        var  scrOfY = 0;
-        if( typeof( window.pageYOffset ) == 'number' ) {
-            //Netscape compliant
-            scrOfY = window.pageYOffset;
-    
-        } else if( document.body && document.body.scrollTop )  {
-            //DOM compliant
-            scrOfY = document.body.scrollTop;
-        } 
-        return scrOfY;
+      var scrOfY = 0;
+      if (typeof (window.pageYOffset) == 'number') {
+        //Netscape compliant
+        scrOfY = window.pageYOffset;
+
+      } else if (document.body && document.body.scrollTop) {
+        //DOM compliant
+        scrOfY = document.body.scrollTop;
+      }
+      return scrOfY;
     }
 
-    function adjustScrollY()
-    {
+    function adjustScrollY() {
       const raw_y = getScrollY()
       const windowHeight = window.innerHeight
       return raw_y / windowHeight
     }
-    
-    </script>
 
-
-   
-<script>
-
-  // Script for example event goes here
-  
-  
-  
   </script>
 
-  
+
+
+  <script>
+
+    // Script for example event goes here
+
+
+
+  </script>
+
+
 </body>
+
 </html>
