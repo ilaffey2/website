@@ -496,7 +496,7 @@
         <div class="work-content">
           <h3>Exact Payments</h3>
           <p>
-            Wrote a lot of customer facing code for Exact Payments, the first company I worked at.
+            I wrote a lot of customer facing code for Exact Payments, the first company I worked at.
             I created our developer portal as well as a merchant demo site for Exact Payments, showing how to integrate
             with their API.
             This was my first job, and I liked talking to customers and helping our sales team close deals.
@@ -544,34 +544,34 @@
 
     document.querySelectorAll(".gallery img, .work-image img").forEach(img => {
       img.addEventListener("click", () => {
-        lightbox.className = "show";
+        // ensure any leftover inline style is cleared
+        lightbox.style.removeProperty("display");
         lightboxImg.src = img.src;
-        document.body.style.overflow = "hidden"; // Prevent background scroll
+
+        // use class to show
+        lightbox.classList.add("show");
+        document.body.style.overflow = "hidden";
       });
     });
 
     function closeLightbox() {
-      lightbox.className = "";
-      setTimeout(() => {
-        lightbox.style.display = "none";
-        document.body.style.overflow = "auto"; // Restore scroll
-      }, 300);
+      // hide purely via class toggle
+      lightbox.classList.remove("show");
+      document.body.style.overflow = "auto";
     }
 
     closeBtn.onclick = closeLightbox;
 
     lightbox.onclick = function (e) {
-      if (e.target === lightbox) {
-        closeLightbox();
-      }
-    }
+      if (e.target === lightbox) closeLightbox();
+    };
 
-    // ESC key to close
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && lightbox.className === "show") {
+      if (e.key === 'Escape' && lightbox.classList.contains("show")) {
         closeLightbox();
       }
     });
+
   </script>
 
 </body>
