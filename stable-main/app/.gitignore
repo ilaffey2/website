@@ -1,0 +1,11 @@
+.glitchdotcom.json
+.node-gyp
+node_modules
+*.png
+*.glb
+*.bin
+*.gltf
+*.jpeg
+*.mp4
+*.mp3
+*.wav
