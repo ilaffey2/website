@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCII Art Viewer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #2A1F1D;
+            color: #DEC165;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(42, 31, 29, 0.95);
+            padding: 24px;
+            border-radius: 8px;
+            border: 1px solid #7F6A55;
+            z-index: 1000;
+            width: 300px;
+        }
+
+        .controls h3 {
+            margin: 0 0 20px 0;
+            font-size: 14px;
+            font-weight: 700;
+            color: #FFCB1B;
+            letter-spacing: 0.05em;
+        }
+
+        .control-group {
+            margin-bottom: 16px;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 12px;
+            color: #BFC65A;
+            font-weight: 400;
+        }
+
+        .control-group input[type="range"] {
+            width: 100%;
+            height: 4px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #7F6A55;
+            border-radius: 2px;
+            outline: none;
+        }
+
+        .control-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #DEC165;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .control-group input[type="range"]::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: #DEC165;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        .control-group span {
+            font-size: 11px;
+            color: #7F6A55;
+            display: block;
+            margin-top: 4px;
+        }
+
+        .control-group select {
+            width: 100%;
+            background: #2A1F1D;
+            color: #DEC165;
+            border: 1px solid #7F6A55;
+            padding: 8px;
+            font-family: inherit;
+            font-size: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 8px;
+            padding: 10px;
+            background: #BE8A13;
+            color: #2A1F1D;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 0.05em;
+            transition: background 0.2s ease;
+        }
+
+        button:hover {
+            background: #FFCB1B;
+        }
+
+        #ascii-container {
+            white-space: pre;
+            line-height: 1;
+            letter-spacing: 0;
+            font-weight: 400;
+            display: inline-block;
+        }
+
+        .error {
+            color: #D6262B;
+            text-align: center;
+            padding: 50px;
+            font-size: 14px;
+        }
+
+        /* Theme presets */
+        .theme-amber { background: #2A1F1D; color: #DEC165; }
+        .theme-green { background: #2A1F1D; color: #919C00; }
+        .theme-red { background: #2A1F1D; color: #E55A1C; }
+        .theme-blue { background: #2A1F1D; color: #7CC9CF; }
+        .theme-light { background: #FFEAA3; color: #2A1F1D; }
+        .theme-matrix { background: #000000; color: #00FF00; }
+    </style>
+</head>
+<body class="theme-amber">
+    <div class="controls">
+        <h3>ASCII CONTROLS</h3>
+        
+        <div class="control-group">
+            <label for="fontSize">Font Size</label>
+            <input type="range" id="fontSize" min="6" max="20" value="11" step="0.5">
+            <span id="fontSizeValue">11px</span>
+        </div>
+
+        <div class="control-group">
+            <label for="letterSpacing">Letter Spacing</label>
+            <input type="range" id="letterSpacing" min="-2" max="8" value="0" step="0.5">
+            <span id="letterSpacingValue">0px</span>
+        </div>
+
+        <div class="control-group">
+            <label for="lineHeight">Line Height</label>
+            <input type="range" id="lineHeight" min="0.6" max="1.4" value="1" step="0.05">
+            <span id="lineHeightValue">1</span>
+        </div>
+
+        <div class="control-group">
+            <label for="theme">Color Theme</label>
+            <select id="theme">
+                <option value="amber">Amber (Default)</option>
+                <option value="green">Terminal Green</option>
+                <option value="red">Warm Red</option>
+                <option value="blue">Cool Cyan</option>
+                <option value="light">Light Mode</option>
+                <option value="matrix">Matrix</option>
+            </select>
+        </div>
+
+        <button onclick="reloadAscii()">Reload ASCII</button>
+        <button onclick="saveAsPNG()">Save as PNG</button>
+    </div>
+
+    <div id="ascii-container">Loading ASCII art...</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        const container = document.getElementById('ascii-container');
+        const body = document.body;
+        
+        // Load ASCII from file
+        async function loadAscii() {
+            try {
+                const response = await fetch('ascii.txt');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const text = await response.text();
+                container.textContent = text;
+            } catch (error) {
+                console.error('Error loading ascii.txt:', error);
+                container.innerHTML = `<div class="error">Error loading ascii.txt: ${error.message}<br><br>Run a local server: python3 -m http.server 8000</div>`;
+            }
+        }
+
+        // Font size control
+        const fontSizeSlider = document.getElementById('fontSize');
+        const fontSizeValue = document.getElementById('fontSizeValue');
+        fontSizeSlider.addEventListener('input', (e) => {
+            const size = e.target.value;
+            container.style.fontSize = size + 'px';
+            fontSizeValue.textContent = size + 'px';
+        });
+
+        // Letter spacing control
+        const letterSpacingSlider = document.getElementById('letterSpacing');
+        const letterSpacingValue = document.getElementById('letterSpacingValue');
+        letterSpacingSlider.addEventListener('input', (e) => {
+            const spacing = e.target.value;
+            container.style.letterSpacing = spacing + 'px';
+            letterSpacingValue.textContent = spacing + 'px';
+        });
+
+        // Line height control
+        const lineHeightSlider = document.getElementById('lineHeight');
+        const lineHeightValue = document.getElementById('lineHeightValue');
+        lineHeightSlider.addEventListener('input', (e) => {
+            const height = e.target.value;
+            container.style.lineHeight = height;
+            lineHeightValue.textContent = height;
+        });
+
+        // Theme control
+        const themeSelect = document.getElementById('theme');
+        themeSelect.addEventListener('change', (e) => {
+            body.className = `theme-${e.target.value}`;
+        });
+
+        // Reload function
+        function reloadAscii() {
+            container.textContent = 'Reloading...';
+            loadAscii();
+        }
+
+        // Save as PNG function
+        async function saveAsPNG() {
+            try {
+                const controls = document.querySelector('.controls');
+                controls.style.display = 'none';
+                
+                container.style.padding = '40px';
+                
+                const canvas = await html2canvas(container, {
+                    backgroundColor: window.getComputedStyle(body).backgroundColor,
+                    scale: 2,
+                    logging: false
+                });
+                
+                controls.style.display = 'block';
+                container.style.padding = '0';
+                
+                canvas.toBlob((blob) => {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'ascii-art.png';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 'image/png');
+                
+            } catch (error) {
+                console.error('Error saving PNG:', error);
+                alert('Error saving PNG: ' + error.message);
+            }
+        }
+
+        // Initial load
+        loadAscii();
+    </script>
+</body>
+</html>
